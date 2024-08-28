@@ -7,7 +7,7 @@ export const signup = async (req, res) => {
    try {
       const existingUser = await User.findOne({ email: email });
       if (existingUser) return res.status(409).send("User Exists");
-      const hashedPassword = bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = new User({
          username: username,
          email: email,
@@ -24,7 +24,7 @@ export const login = async (req, res) => {
       const { email, password } = req.body;
       const user = await User.findOne({ email: email });
       if (!user) return res.status(400).send("Invalid Email or Password");
-      const passwordMatch = bcrypt.compare(password, user.password);
+      const passwordMatch = await bcrypt.compare(password, user.password);
       if (!passwordMatch)
          return res.status(400).send("Invalid Email or Password");
 
