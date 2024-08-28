@@ -1,4 +1,4 @@
-import {check , validationResult, validationReult} from "express-validator"
+import {check , validationResult} from "express-validator"
 
 export const validateAddBook = [
     check('title')
