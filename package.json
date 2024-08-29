@@ -2,7 +2,7 @@
   "name": "readnest",
   "version": "1.0.0",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,7 +18,7 @@
     "express": "^4.19.2",
     "express-validator": "^7.2.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.5.4"
+    "mongoose": "^8.6.0"
   },
   "devDependencies": {
     "chai": "^5.1.1",
