@@ -8,21 +8,33 @@ export const fetchBooks = async (query) => {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        return data.items;
+       return data.items.map((book)=>{
+             return {
+                id:book.id,
+                title:book.volumeInfo.title,
+                author:(book.volumeInfo.authors&&book.volumeInfo.authors.join(", "))||"No author",
+                genre:(book.volumeInfo.categories&&book.volumeInfo.categories.join(", "))||"No catagorie",
+                description:book.volumeInfo.description,
+                coverImg:(book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail) ||"no image",
+                publishedDate:book.volumeInfo.publishedDate
+             }
+        })
     } catch (error) {
         console.error('Error fetching data:', error);
     }
 };
 
 // sample on how to use the api
-
-/* const getBooks=async()=>{
-      const books=await fetchBooks("history");
+/* 
+const getBooks=async()=>{
+      const books=await fetchBooks("fiction");
       console.log(books)
       books.forEach((book, index) => {
-        console.log(`${index + 1}. Title: ${book.volumeInfo.title}`);
-        console.log(`   Authors: ${book.volumeInfo.authors.join(', ')}`);
-        console.log(`CoverImage : ${(book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail) ||"no image"}`)
+        console.log(`${index + 1}. Title: ${book.title}`);
+        console.log(`categories: ${book.genre}`)
+        console.log(`   Authors: ${book.author}`);
+        console.log(`CoverImage : ${book.coverImg}`)
+        console.log(`publishedDate : ${book.publishedDate}`)
         console.log('---');
     });
 }
