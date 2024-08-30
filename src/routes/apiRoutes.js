@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getBooks,searchBooks } from "../controllers/apiControllers";
+import { getBooks,searchBooks } from "../controllers/apiControllers.js";
 const router = Router();
 
 router.get("/",getBooks)

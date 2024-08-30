@@ -1,4 +1,4 @@
-import { fetchBooks } from "../utils/externalAPI";
+import { fetchBooks } from "../utils/externalAPI.js";
 
 export const getBooks = async (req, res) => {
   try {
