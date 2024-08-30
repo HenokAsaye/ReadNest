@@ -26,7 +26,10 @@ const bookSchema = new mongoose.Schema({
         enum: ['Not Started', 'In Progress', 'Completed'],
         default: 'Not Started'
     },
-
+    owner: {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    }
 });
 
 const Book = mongoose.model('Book', bookSchema); 
