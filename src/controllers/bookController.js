@@ -1,6 +1,7 @@
 import { fetchBooks } from "../utils/externalAPI";
 import Book from "../models/bookModels";
 import User from "../models/userModels";
+import mongoose from "mongoose";
 
 export const addBook = async (req, res) => {
     try {
@@ -74,6 +75,7 @@ export const getUserBooks = async (req, res) => {
 export const updateBookStatus = async (req, res) => {
     try {
         const userId = req.user._id;
+        const objectUserID=mongoose.Types.ObjectId(userId)
         const { title, readStatus } = req.body;
 
         if (!title || !readStatus) {
@@ -84,17 +86,13 @@ export const updateBookStatus = async (req, res) => {
             return res.status(400).json({ message: "Invalid Read Status!" });
         }
 
-        const foundUser = await User.findById(userId).populate('books');
-        const book = foundUser.books.find(b => b.title === title);
-
-        if (!book) {
+        const updatedBook = await Book.findOneAndUpdate({title:title,owner:objectUserID},{$set:{status:readStatus}},{new:true});
+        if (!updatedBook) {
             return res.status(404).json({ message: "Book not found in your collection" });
         }
+        return res.status(200).json({ message: "Read status updated successfully!" 
+            ,updatedBook:updatedBook});
 
-        book.status = readStatus;
-        await book.save();
-
-        return res.status(200).json({ message: "Read status updated successfully!" });
     } catch (error) {
         return res.status(500).json({ message: "An error occurred while updating the read status" });
     }
