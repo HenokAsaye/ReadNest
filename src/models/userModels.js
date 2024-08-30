@@ -20,8 +20,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['Admin', 'User'],
         default: 'User'
-    }
-});
+    },
+    books: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Book'
+    }],
+}, { timestamps: true });
 
-const user = mongoose.model('user', userSchema);
-export default user;
+
+const User = mongoose.model('user', userSchema);
+export default User;
