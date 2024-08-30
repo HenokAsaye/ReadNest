@@ -15,16 +15,18 @@ const bookSchema = new mongoose.Schema({
     publishedDate: {
         type: Date
     },
+
+    coverImg:{
+        type:String
+    },
     status: {
         type: String,
         enum: ['Not Started', 'In Progress', 'Completed'],
         default: 'Not Started'
     },
-    id: {
-        type: Number,
-        unique: true  
-    }
+
 });
 
 const Book = mongoose.model('Book', bookSchema); 
 export default Book;
+

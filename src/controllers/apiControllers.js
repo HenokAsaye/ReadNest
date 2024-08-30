@@ -29,7 +29,11 @@ export const searchBooks = async (req, res) => {
     const searchResults = await fetchBooks(titleQuery);
 
     if (!searchResults) {
+
       return res.status(404).json({ error: `No books found with the title "${query}"` });
+=======
+   
+
     }
     return res.status(200).json({
       message: `Search results for books with the title "${query}":`,
