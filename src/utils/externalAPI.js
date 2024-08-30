@@ -25,9 +25,9 @@ export const fetchBooks = async (query) => {
 };
 
 // sample on how to use the api
-/* 
-const getBooks=async()=>{
-      const books=await fetchBooks("fiction");
+
+/* const getBooks=async()=>{
+      const books=await fetchBooks(`subject:adventure`);
       console.log(books)
       books.forEach((book, index) => {
         console.log(`${index + 1}. Title: ${book.title}`);
