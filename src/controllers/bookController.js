@@ -55,15 +55,10 @@ export const addBook = async (req, res) => {
 export const getUserBooks = async (req, res) => {
     try {
         const userId = req.user._id;
-        const { filter, sort, limit, page } = req.query;
-
         const foundUser = await User.findById(userId).populate({
             path: 'books',
-            match: filter || {},
             options: {
                 sort: sort || { title: 1 },
-                limit: parseInt(limit, 10) || 10,
-                skip: ((parseInt(page, 10) || 1) - 1) * (parseInt(limit, 10) || 10),
             }
         });
 
@@ -76,8 +71,6 @@ export const getUserBooks = async (req, res) => {
 
         return res.status(200).json({
             totalBooks,
-            totalPages: Math.ceil(totalBooks / (parseInt(limit, 10) || 10)),
-            currentPage: parseInt(page, 10) || 1,
             books,
         });
     } catch (error) {
