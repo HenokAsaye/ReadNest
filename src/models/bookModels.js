@@ -22,9 +22,9 @@ const bookSchema = new mongoose.Schema({
     },
     id: {
         type: Number,
-        unique: true  // Ensure it's unique if used as a separate identifier
+        unique: true  
     }
 });
 
-const Book = mongoose.model('Book', bookSchema);  // Capitalize model name
+const Book = mongoose.model('Book', bookSchema); 
 export default Book;
