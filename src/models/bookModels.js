@@ -2,10 +2,12 @@ import mongoose from "mongoose";
 
 const bookSchema = new mongoose.Schema({
     title: {
-        type: String
+        type: String,
+        required: true
     },
     author: {
-        type: String
+        type: String,
+        required: true
     },
     genre: {
         type: String
@@ -13,18 +15,18 @@ const bookSchema = new mongoose.Schema({
     publishedDate: {
         type: Date
     },
+
     coverImg:{
         type:String
     },
-    ownedBy:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"User"
+    status: {
+        type: String,
+        enum: ['Not Started', 'In Progress', 'Completed'],
+        default: 'Not Started'
     },
-    isCompleted:{
-        type:Boolean,
-        default:false
-    }
+
 });
 
-const Book = mongoose.model('book', bookSchema);
-export default Book
+const Book = mongoose.model('Book', bookSchema); 
+export default Book;
+
