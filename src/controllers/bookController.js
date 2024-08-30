@@ -7,8 +7,8 @@ export const addBook = async (req, res) => {
         const userId = req.user._id;
         const { title, author, genre, publishedDate } = req.body;
 
-        if (!title || !author) {
-            return res.status(400).json({ message: "Title and Author are required" });
+        if (!title || !author || !genre) {
+            return res.status(400).json({ message: "Title,Author And genre are required" });
         }
 
         if (req.query.fromApi) {
