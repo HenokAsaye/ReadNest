@@ -12,3 +12,5 @@ router.get("/", auth(), getUserBooks);
 router.post("/", auth(), addBook);
 router.patch("/", auth(), updateBookStatus);
 router.delete("/", auth(), deleteBooks);
+
+export default router;

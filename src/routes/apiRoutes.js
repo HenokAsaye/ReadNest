@@ -4,3 +4,4 @@ const router = Router();
 
 router.get("/",getBooks)
 router.get("/search",searchBooks)
+export default router
