@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { auth } from "../middleware/auth";
+import { auth } from "../middleware/auth.js";
 import {
    addBook,
    getUserBooks,
    updateBookStatus,
    deleteBooks,
-} from "../controllers/bookController";
+} from "../controllers/bookController.js";
 const router = Router();
 
 router.get("/", auth(), getUserBooks);

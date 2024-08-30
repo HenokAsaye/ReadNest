@@ -1,6 +1,6 @@
 import { fetchBooks } from "../utils/externalAPI";
-import Book from "../models/bookModels";
-import User from "../models/userModels";
+import Book from "../models/bookModels.js";
+import User from "../models/userModels.js";
 import mongoose from "mongoose";
 
 export const addBook = async (req, res) => {
