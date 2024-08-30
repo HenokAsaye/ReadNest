@@ -12,8 +12,19 @@ const bookSchema = new mongoose.Schema({
     },
     publishedDate: {
         type: Date
+    },
+    coverImg:{
+        type:String
+    },
+    ownedBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    },
+    isCompleted:{
+        type:Boolean,
+        default:false
     }
 });
 
-const book = mongoose.model('book', bookSchema);
-export default book
+const Book = mongoose.model('book', bookSchema);
+export default Book
