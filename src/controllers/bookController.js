@@ -15,34 +15,27 @@ export const addBook = async (req, res) => {
             const query = `intitle:${title}`;
             const data = await fetchBooks(query);
 
-            if (!data || !data.items) {
+            if (!data) {
                 return res.status(404).json({ message: `No books found with the title "${title}"` });
             }
 
-            const bookData = data.items[0].volumeInfo;
-            const bookDetails = {
-                title: bookData.title,
-                author: bookData.authors ? bookData.authors.join(', ') : 'Unknown',
-                genre: genre || 'Unknown',
-                publishedDate: bookData.publishedDate || 'Unknown',
-                coverImage: bookData.imageLinks?.thumbnail || 'No image available',
-            };
+            const bookDetails = data[0];
 
             const existingBook = await Book.findOne({ title: bookDetails.title, author: bookDetails.author });
             if (existingBook) {
                 return res.status(409).json({ message: "This book already exists in your collection" });
             }
 
-            const newBook = new Book(bookDetails);
-            await newBook.save();
+            let newBook = new Book(bookDetails);
+            newBook= await newBook.save();
 
             await User.findByIdAndUpdate(userId, { $push: { books: newBook._id } });
 
             return res.status(201).json({ message: "Book added successfully!", book: newBook });
         }
 
-        const newBook = new Book({ title, author, genre, publishedDate });
-        await newBook.save();
+        let newBook = new Book({ title, author, genre, publishedDate });
+        newBook=await newBook.save();
 
         await User.findByIdAndUpdate(userId, { $push: { books: newBook._id } });
 
@@ -58,7 +51,7 @@ export const getUserBooks = async (req, res) => {
         const foundUser = await User.findById(userId).populate({
             path: 'books',
             options: {
-                sort: sort || { title: 1 },
+                sort: { title: 1 },
             }
         });
 
