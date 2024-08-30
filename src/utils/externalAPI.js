@@ -10,13 +10,12 @@ export const fetchBooks = async (query) => {
         const data = await response.json();
        return data.items.map((book)=>{
              return {
-                id:book.id,
                 title:book.volumeInfo.title,
                 author:(book.volumeInfo.authors&&book.volumeInfo.authors.join(", "))||"No author",
                 genre:(book.volumeInfo.categories&&book.volumeInfo.categories.join(", "))||"No catagorie",
-                description:book.volumeInfo.description,
+                description:book.volumeInfo.description||"no description",
                 coverImg:(book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail) ||"no image",
-                publishedDate:book.volumeInfo.publishedDate
+                publishedDate:book.volumeInfo.publishedDate||"unknown"
              }
         })
     } catch (error) {
