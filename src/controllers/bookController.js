@@ -1,4 +1,4 @@
-import { fetchBooks } from "../utils/externalAPI";
+import { fetchBooks } from "../utils/externalAPI.js";
 import Book from "../models/bookModels.js";
 import User from "../models/userModels.js";
 import mongoose from "mongoose";

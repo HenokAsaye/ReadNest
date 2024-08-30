@@ -8,9 +8,9 @@ import {
 } from "../controllers/bookController.js";
 const router = Router();
 
-router.get("/", auth(), getUserBooks);
-router.post("/", auth(), addBook);
-router.patch("/", auth(), updateBookStatus);
-router.delete("/", auth(), deleteBooks);
+router.get("/", auth, getUserBooks);
+router.post("/",auth,  addBook);
+router.patch("/",auth,  updateBookStatus);
+router.delete("/",auth,  deleteBooks);
 
 export default router;
