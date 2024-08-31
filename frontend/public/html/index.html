@@ -27,7 +27,7 @@
          </section>
          <section class="createBook">
             <h1>Add Your Own Book</h1>
-            <form action="/blogs" method="post">
+            <form id="bookForm">
                <label for="title">Book Title :</label>
                <input type="text" id="title" name="title" required />
                <label for="snippet">Book Author :</label>
@@ -39,8 +39,8 @@
                <label for="description">Book description :</label>
                <textarea
                   type="text"
-                  id="body"
-                  name="body"
+                  id="description"
+                  name="description"
                   cols="8"
                   rows="10"></textarea>
                <button class="addBooks">Add Book</button>

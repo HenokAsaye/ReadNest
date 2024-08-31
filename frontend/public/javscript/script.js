@@ -31,22 +31,26 @@ const getBooks=async()=>{
     const myBooksList=await fetchData("http://localhost:3000/books/");
     const recommendedBooks=await fetchData("http://localhost:3000/api/books?genre=thriller")
     booksData={...recommendedBooks}
-    myBookList={...myBooksList}
+    myBookList={recommendations:[...myBooksList.books]}
    }catch (error) {
     console.error('Error fetching books:', error);
   }
- // displayBooks(myBookList,myBookContainer)
-  displayBooks(booksData,bookContainer);
+  displayBooks(myBookList,myBookContainer,"Mark Complete")
+  displayBooks(booksData,bookContainer,"Add Book");
 }
 getBooks();
-const displayBooks = (book,container) => {
+const displayBooks = (book,container,btnMsg) => {
    book.recommendations.forEach((book,index) => {
+      if(!book.coverImg) {
+        console.log("one")
+        book.coverImg="../../img/book.jpg";
+    }
       container.innerHTML += `
           <div class="book" id=${index}>
                 <h2>Title: ${book.title}</h2>
                 <img src=${book.coverImg} alt="no image">
                 <p>author: ${book.author} </p>
-                <button class="addBooks">Add Book</button>
+                <button class="addBooks">${btnMsg}</button>
             </div>
           `;
    });
@@ -55,16 +59,22 @@ bookContainer.addEventListener("click",async(e)=>{
     if(e.target.tagName=="BUTTON") {
         const index=e.target.parentElement.id
         console.log(booksData.recommendations[index])
-         const response=await fetch("http://localhost:3000/books/",{
+       try{ const response=await fetch("http://localhost:3000/books/",{
             method: "POST",
             body: JSON.stringify(booksData.recommendations[index]),
             headers: {
-            "Content-type": "application/json;",
+            "Content-type": "application/json",
             "authorization":token
           }
-         })
-       const data=await response.json();
-       console.log(data)
+         });
+         if (response.ok) {
+            const result = await response.json();
+            console.log('book added successfully:', result);
+        } else {
+            console.error('book adding failed:');
+        }}catch(err){
+            console.log(err)
+        }
       }
 })
 showMyBooks.onclick=() => {
@@ -82,3 +92,26 @@ showCreateBook.onclick=()=>{
     myBooks.style.display="none"
     createBook.style.display="block";
 }
+
+document.getElementById("bookForm").addEventListener("submit",async function(e){
+     e.preventDefault();
+     const formData = new FormData(this);
+     const formObject = Object.fromEntries(formData.entries());
+     console.log(formObject)
+     try{const response=await fetch("http://localhost:3000/books/",{
+        method: "POST",
+        body: JSON.stringify(formObject),
+        headers: {
+        "Content-type": "application/json",
+        "authorization":token
+      }
+     })
+     if (response.ok) {
+        const result = await response.json();
+        console.log('book form added successfully:', result);
+    } else {
+        console.error('book form adding failed:');
+    }}catch(err){
+        console.log(err)
+    }
+})
