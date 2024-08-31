@@ -8,13 +8,71 @@ body {
    background-color: #09203f;
 }
 header {
-   padding: 30px;
+   padding: 20px;
+   background-color: #0d2748;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-between;
+}
+.header-content {
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-bottom: 10px;
+}
+header h1 {
+   background: linear-gradient(#4e65ff, #92effd);
+   background-clip: text;
+   color: transparent;
+   font-size: 2rem;
+   margin-left: 20px;
+}
+.search-bar {
+   display: flex;
+   align-items: center;
+   margin-right: 20px;
+}
+.search-bar input {
+   padding: 10px;
+   font-size: 1rem;
+   border-radius: 5px;
+   border: 1px solid #D8B5FF;
+   background-color: #09203f;
+   color: aliceblue;
+   width: 300px;
+}
+.search-bar button {
+   padding: 10px 15px;
+   font-size: 1rem;
+   margin-left: 10px;
+   border: 1px solid #D8B5FF;
+   border-radius: 5px;
+   background-color: dodgerblue;
+   color: aliceblue;
+   cursor: pointer;
+}
+nav {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   background-color: #0b3a68;
+   padding: 10px 0;
    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
-header h1{
-    background: linear-gradient(#4e65ff, #92effd);
-    background-clip: text;
-    color: transparent;
+nav button {
+   background-color: transparent;
+   color: #92effd;
+   padding: 10px 20px;
+   font-size: 17px;
+   border: none;
+   cursor: pointer;
+   transition: color 0.3s ease;
+}
+nav button:hover {
+   color: #D8B5FF;
 }
 main {
    display: flex;
@@ -35,7 +93,18 @@ aside button {
    color: #92effd;
    padding: 6px;
    font-size: 17px;
-   border: 0;
+   border: none;
+   cursor: pointer;
+}
+aside button:hover {
+   color: #D8B5FF;
+}
+.content {
+   flex: 1;
+   padding: 20px;
+   min-height: 100vh;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   color: #D8B5FF;
 }
 .books-Container,
 .myBooks-Container {
@@ -81,7 +150,12 @@ p {
    color: aliceblue;
    background-color: dodgerblue;
    border: 0;
+   border-radius: 2px;
    width: 160px;
+   cursor: pointer;
+}
+.addBooks:hover {
+   background-color: #1e90ff;
 }
 .book img {
    width: 160px;
@@ -91,7 +165,7 @@ p {
    flex: 1;
 }
 .createBook h1 {
-   margin-left: 100px;
+   margin-left: auto;
 }
 .createBook form {
    display: flex;
@@ -100,7 +174,10 @@ p {
    margin-left: 100px;
    margin-top: 50px;
    gap: 6px;
+   justify-content: center;
    border: 1px solid #121212;
+   border-radius: 5px;
+   outline: none;
    padding: 10px;
    padding-left: 30px;
 }
@@ -110,4 +187,6 @@ textarea {
    padding: 10px;
    font-size: 1rem;
    width: 300px;
+   border-radius: 10px;
+   outline: none;
 }
