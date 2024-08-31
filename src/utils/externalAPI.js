@@ -23,18 +23,3 @@ export const fetchBooks = async (query) => {
     }
 };
 
-// sample on how to use the api
-
-/* const getBooks=async()=>{
-      const books=await fetchBooks(`subject:adventure`);
-      console.log(books)
-      books.forEach((book, index) => {
-        console.log(`${index + 1}. Title: ${book.title}`);
-        console.log(`categories: ${book.genre}`)
-        console.log(`   Authors: ${book.author}`);
-        console.log(`CoverImage : ${book.coverImg}`)
-        console.log(`publishedDate : ${book.publishedDate}`)
-        console.log('---');
-    });
-}
-getBooks(); */

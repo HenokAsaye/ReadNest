@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const auth = (req, res, next) => {
+
    const token = req.headers["authorization"];
    if (!token) return res.status(401).send("empty token");
 
