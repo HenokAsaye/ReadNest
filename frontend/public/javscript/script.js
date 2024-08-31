@@ -6,7 +6,8 @@ const myBookContainer = document.getElementById("myBooks");
 const showMyBooks = document.getElementById("showMyBooks");
 const showRecommended=document.getElementById("showRecommended")
 const showCreateBook=document.getElementById("showCreateBook")
-
+const loadingIndicator = document.getElementById("loading");
+loadingIndicator.style.display = "block";
 let booksData={};
 let myBookList={};
 const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDJjNjEyNjM0MzBjYmIyYjFiYTI0NCIsImlhdCI6MTcyNTA4OTMxM30.zCOWdPCin6BKy8j8kkVQu2yTOhBCsv14vy6tRLpdxI4";
@@ -29,19 +30,32 @@ const getBooks=async()=>{
    try  { 
     const myBooksList=await fetchData("http://localhost:3000/books/");
     const recommendedBooks=await fetchData("http://localhost:3000/api/books?genre=thriller")
-    booksData={...recommendedBooks}
-    myBookList={recommendations:[...myBooksList.books]}
+    loadingIndicator.style.display = "none";
+    booksData=[...recommendedBooks.recommendations]
+    myBookList=[...myBooksList.books]
    }catch (error) {
     console.error('Error fetching books:', error);
   }
-  displayBooks(myBookList,myBookContainer,"Mark Complete")
-  displayBooks(booksData,bookContainer,"Add Book");
+  displayBooks(myBookList,myBookContainer,"Mark Complete",true)
+  displayBooks(booksData,bookContainer,"Add Book",false);
 }
 getBooks();
-const displayBooks = (book,container,btnMsg) => {
-   book.recommendations.forEach((book,index) => {
+const displayBooks = (book,container,btnMsg,isMyCollection) => {
+
+   book.forEach((book,index) => {
       if(!book.coverImg) {
         book.coverImg="../../img/book.jpg";
+    }
+    if(btnMsg!=="Add Book"){
+        if(book.status==="Not Started"){
+             btnMsg="Start Now";
+        }
+        else if(book.status==="In Progress"){
+            btnMsg="Mark as Complete"
+        }
+        else{
+            btnMsg="Completed"
+        }
     }
       container.innerHTML += `
           <div class="book" id=${index}>
@@ -49,6 +63,7 @@ const displayBooks = (book,container,btnMsg) => {
                 <img src=${book.coverImg} alt="no image">
                 <p>author: ${book.author} </p>
                 <button class="addBooks">${btnMsg}</button>
+                ${isMyCollection?"<button class='removeBook'>X</button>":""}
             </div>
           `;
    });
@@ -58,13 +73,14 @@ bookContainer.addEventListener("click",async(e)=>{
         const index=e.target.parentElement.id
        try{ const response=await fetch("http://localhost:3000/books/",{
             method: "POST",
-            body: JSON.stringify(booksData.recommendations[index]),
+            body: JSON.stringify(booksData[index]),
             headers: {
             "Content-type": "application/json",
             "authorization":token
           }
          });
          if (response.ok) {
+            window.location.reload();
             const result = await response.json();
             console.log('book added successfully:', result);
         } else {
@@ -73,6 +89,70 @@ bookContainer.addEventListener("click",async(e)=>{
             console.log(err)
         }
       }
+})
+myBookContainer.addEventListener("click",async(e)=>{
+    if(e.target.classList.contains("addBooks")) {
+        const index=e.target.parentElement.id
+        let status;
+        if(e.target.textContent==="Start Now"){
+            e.target.textContent="Mark as Complete"
+            status="In Progress"
+        }
+        else if(e.target.textContent==="Mark as Complete"){
+             status="Completed";
+             e.target.textContent="Completed"
+        }
+        try{
+            const response=await fetch("http://localhost:3000/books/",{
+                method:"PATCH",
+                body:JSON.stringify({title:myBookList[index].title,status}),
+                headers:{
+                    "Content-type": "application/json",
+                    "authorization":token
+                }
+            })
+            if (response.ok) {
+                const result = await response.json();
+                console.log('status updated successfully:', result);
+            } else {
+                console.error('status updating failed:');
+            }
+        }catch(err){
+            console.log(err)
+        }
+    }
+    if(e.target.classList.contains("removeBook")) {
+        const index=e.target.parentElement.id
+        const parentElement=e.target.parentElement
+        const modal=document.getElementById("modal")
+        modal.style.display="block";
+        document.getElementById("yes").addEventListener("click",async(e)=>{
+            try{
+                const response=await fetch("http://localhost:3000/books/",{
+                    method:"DELETE",
+                    body:JSON.stringify({title:myBookList[index].title,author:myBookList[index].author}),
+                    headers:{
+                        "Content-type": "application/json",
+                        "authorization":token
+                    }
+                })
+                if (response.ok) {
+                    parentElement.remove();
+                    const result = await response.json();
+                    console.log('book deleted successfully:', result);
+                } else {
+                    console.error('book deleting failed:');
+                }
+            }catch(err){
+                console.log(err)
+            }
+            modal.style.display="none"
+        })
+        document.getElementById("no").addEventListener("click",(e)=>{
+            modal.style.display="none"
+        })
+        
+    }
 })
 showMyBooks.onclick=() => {
    recommendedBooks.style.display = "none";
@@ -103,6 +183,7 @@ document.getElementById("bookForm").addEventListener("submit",async function(e){
       }
      })
      if (response.ok) {
+        window.location.reload();
         const result = await response.json();
         console.log('book form added successfully:', result);
     } else {
