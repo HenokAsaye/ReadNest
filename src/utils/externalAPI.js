@@ -13,9 +13,9 @@ export const fetchBooks = async (query) => {
                 title:book.volumeInfo.title,
                 author:(book.volumeInfo.authors&&book.volumeInfo.authors.join(", "))||"No author",
                 genre:(book.volumeInfo.categories&&book.volumeInfo.categories.join(", "))||"No catagorie",
+                publishedDate:book.volumeInfo.publishedDate||"unknown",
                 description:book.volumeInfo.description||"no description",
                 coverImg:(book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail) ||"no image",
-                publishedDate:book.volumeInfo.publishedDate||"unknown"
              }
         })
     } catch (error) {
