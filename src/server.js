@@ -10,4 +10,4 @@ connectToDb().then(() => {
     app.listen(port, () => {
         console.log(`Server is running on port ${port}`);
     });
-});
+}).catch(err=>console.log("error connecting to server"+err.message));
