@@ -1,0 +1,113 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+body {
+   font-family: "Courier New", Courier, monospace;
+   background-color: #09203f;
+}
+header {
+   padding: 30px;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+header h1{
+    background: linear-gradient(#4e65ff, #92effd);
+    background-clip: text;
+    color: transparent;
+}
+main {
+   display: flex;
+   width: 100%;
+}
+aside {
+   width: 250px;
+   color: aliceblue;
+   padding: 10px;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   box-shadow: 5px 0 5px rgba(0, 0, 0, 0.4);
+}
+aside button {
+   background-color: transparent;
+   margin-top: 10px;
+   color: #92effd;
+   padding: 6px;
+   font-size: 17px;
+   border: 0;
+}
+.books-Container,
+.myBooks-Container {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 25px;
+   padding-top: 30px;
+   margin-top: 10px;
+}
+.book {
+   display: grid;
+   grid-template-rows: subgrid;
+   grid-row: span 4;
+   padding: 10px;
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   color: #D8B5FF;
+}
+.myBooks {
+   display: none;
+}
+.createBook {
+   display: none;
+}
+.books,
+.myBooks,
+.createBook {
+   flex: 1;
+   padding: 20px;
+   min-height: 100vh;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   color: #D8B5FF;
+}
+h2 {
+   font-size: 1.2rem;
+}
+p {
+   font-size: 18px;
+   text-transform: capitalize;
+}
+.addBooks {
+   padding: 6px;
+   font-size: 17px;
+   color: aliceblue;
+   background-color: dodgerblue;
+   border: 0;
+   width: 120px;
+}
+.book img {
+   width: 160px;
+   height: 200px;
+}
+.createBook {
+   flex: 1;
+}
+.createBook h1 {
+   margin-left: 100px;
+}
+.createBook form {
+   display: flex;
+   flex-direction: column;
+   max-width: 500px;
+   margin-left: 100px;
+   margin-top: 50px;
+   gap: 6px;
+   border: 1px solid #121212;
+   padding: 10px;
+   padding-left: 30px;
+}
+.createBook input,
+textarea {
+   margin-bottom: 6px;
+   padding: 10px;
+   font-size: 1rem;
+   width: 300px;
+}
