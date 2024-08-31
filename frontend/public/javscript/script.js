@@ -34,11 +34,11 @@ const getBooks=async()=>{
    }catch (error) {
     console.error('Error fetching books:', error);
   }
-  displayBooks(myBookList,myBookContainer,"Mark Complete")
-  displayBooks(booksData,bookContainer,"Add Book");
+  displayBooks(myBookList,myBookContainer,"Mark Complete",true)
+  displayBooks(booksData,bookContainer,"Add Book",false);
 }
 getBooks();
-const displayBooks = (book,container,btnMsg) => {
+const displayBooks = (book,container,btnMsg,isMyCollection) => {
 
    book.forEach((book,index) => {
       if(!book.coverImg) {
@@ -61,6 +61,7 @@ const displayBooks = (book,container,btnMsg) => {
                 <img src=${book.coverImg} alt="no image">
                 <p>author: ${book.author} </p>
                 <button class="addBooks">${btnMsg}</button>
+                ${isMyCollection?"<button class='removeBook'>X</button>":""}
             </div>
           `;
    });
@@ -87,7 +88,7 @@ bookContainer.addEventListener("click",async(e)=>{
       }
 })
 myBookContainer.addEventListener("click",async(e)=>{
-    if(e.target.tagName=="BUTTON") {
+    if(e.target.classList.contains("addBooks")) {
         const index=e.target.parentElement.id
         let status;
         if(e.target.textContent==="Start Now"){
@@ -112,6 +113,28 @@ myBookContainer.addEventListener("click",async(e)=>{
                 console.log('status updated successfully:', result);
             } else {
                 console.error('status updating failed:');
+            }
+        }catch(err){
+            console.log(err)
+        }
+    }
+    if(e.target.classList.contains("removeBook")) {
+        const index=e.target.parentElement.id
+        e.target.parentElement.remove();
+        try{
+            const response=await fetch("http://localhost:3000/books/",{
+                method:"DELETE",
+                body:JSON.stringify({title:myBookList[index].title,author:myBookList[index].author}),
+                headers:{
+                    "Content-type": "application/json",
+                    "authorization":token
+                }
+            })
+            if (response.ok) {
+                const result = await response.json();
+                console.log('book deleted successfully:', result);
+            } else {
+                console.error('book deleting failed:');
             }
         }catch(err){
             console.log(err)

@@ -46,9 +46,10 @@ aside button {
    margin-top: 10px;
 }
 .book {
+   position: relative;
    display: grid;
    grid-template-rows: subgrid;
-   grid-row: span 4;
+   grid-row: span 5;
    padding: 10px;
    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
    color: #D8B5FF;
@@ -70,6 +71,7 @@ aside button {
 }
 h2 {
    font-size: 1.2rem;
+   margin-top: 30px;
 }
 p {
    font-size: 18px;
@@ -82,6 +84,19 @@ p {
    background-color: dodgerblue;
    border: 0;
    width: 160px;
+}
+.removeBook{
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    background-color: transparent;
+    border: 0;
+    color: rgb(185, 11, 11);
+    position: absolute;
+    top: 10px;
+    right: 5px;
 }
 .book img {
    width: 160px;
