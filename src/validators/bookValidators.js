@@ -4,6 +4,7 @@ export const validateAddBook = [
     check('title')
         .notEmpty().withMessage('title is Required!'),
     check('author')
+        .optional()
         .notEmpty().withMessage("Author is Required!"),
     check('publishedDate')
         .optional()
@@ -12,7 +13,7 @@ export const validateAddBook = [
         .optional()
         .notEmpty().withMessage("Genre is Required!"),
     (req,res,next) =>{
-        const errors = validationReult(req)
+        const errors = validationResult(req)
         if(!errors.isEmpty()){
             return res.status(400).json({errors:errors.array()});
         }

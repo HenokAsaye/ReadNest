@@ -5,35 +5,12 @@ import User from "../models/userModels.js";
 export const addBook = async (req, res) => {
     try {
         const userId = req.user.id
-        const { title, author, genre, publishedDate } = req.body;
+        const { title, author, genre } = req.body;
 
         if (!title || !author || !genre) {
             return res.status(400).json({ message: "Title,Author And genre are required" });
         }
-
-        if (req.query.fromApi) {
-            const query = `intitle:${title}`;
-            const data = await fetchBooks(query);
-
-            if (!data) {
-                return res.status(404).json({ message: `No books found with the title "${title}"` });
-            }
-
-            const bookDetails = data[0];
-
-            const existingBook = await Book.findOne({ title: bookDetails.title, author: bookDetails.author });
-            if (existingBook) {
-                return res.status(409).json({ message: "This book already exists in your collection" });
-            }
-
-            let newBook = new Book(bookDetails);
-            newBook.owner=userId;
-            newBook= await newBook.save();
-            const user=await User.findByIdAndUpdate(userId, { $push: { books: newBook._id } },{new:true});
-            return res.status(201).json({ message: "Book added successfully!", book: newBook });
-        }
-
-        let newBook = new Book({ title, author, genre, publishedDate });
+        let newBook = new Book(req.body);
         newBook.owner=userId;
         newBook=await newBook.save();
         const user=await User.findByIdAndUpdate(userId, { $push: { books: newBook._id } },{new:true});
