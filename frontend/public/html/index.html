@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Home page</title>
+      <link rel="stylesheet" href="../style/homePage.css" />
+      <script src="../javscript/script.js" type="module" defer></script>
+   </head>
+   <body>
+      <header>
+         <h1>ReadNest</h1>
+      </header>
+      <main>
+         <aside>
+            <button id="showRecommended">Recommended Books</button>
+            <button id="showMyBooks">My Book List</button>
+            <button id="showCreateBook">Add Books</button>
+         </aside>
+         <section class="books">
+            <h1>Recommended Books</h1>
+            <div class="books-Container" id="books"></div>
+         </section>
+         <section class="myBooks">
+            <h1>My Books</h1>
+            <div class="myBooks-Container" id="myBooks"></div>
+         </section>
+         <section class="createBook">
+            <h1>Add Your Own Book</h1>
+            <form action="/blogs" method="post">
+               <label for="title">Book Title :</label>
+               <input type="text" id="title" name="title" required />
+               <label for="snippet">Book Author :</label>
+               <input type="text" id="author" name="author" required />
+               <label for="genre">Book Genre :</label>
+               <input type="text" id="genre" name="genre" required />
+               <label for="publishedDate">publishedDate :</label>
+               <input type="text" id="publishedDate" name="publishedDate" placeholder="YYYY/MM/DD" />
+               <label for="description">Book description :</label>
+               <textarea
+                  type="text"
+                  id="body"
+                  name="body"
+                  cols="8"
+                  rows="10"></textarea>
+               <button class="addBooks">Add Book</button>
+            </form>
+         </section>
+      </main>
+   </body>
+</html>
