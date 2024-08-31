@@ -27,7 +27,6 @@ showMyBooks.onclick=() => {
    recommendedBooks.style.display = "none";
    myBooks.style.display="block"
    createBook.style.display="none";
-   displayBooks(myBooksList,myBookContainer)
 };
 showRecommended.onclick=()=>{
     recommendedBooks.style.display = "block";
@@ -39,5 +38,5 @@ showCreateBook.onclick=()=>{
     myBooks.style.display="none"
     createBook.style.display="block";
 }
-
+displayBooks(myBooksList,myBookContainer)
 displayBooks(books,bookContainer);
