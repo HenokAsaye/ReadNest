@@ -60,7 +60,7 @@ const displayBooks = (book,container,btnMsg) => {
                 <h2>Title: ${book.title}</h2>
                 <img src=${book.coverImg} alt="no image">
                 <p>author: ${book.author} </p>
-                <button class="addBooks">${btnMsg}</button>
+                <div></div>
             </div>
           `;
    });
@@ -90,12 +90,14 @@ myBookContainer.addEventListener("click",async(e)=>{
     if(e.target.tagName=="BUTTON") {
         const index=e.target.parentElement.id
         let status;
-        if(e.target.textContent==="Start Now")
-             status="In Progress"
-        else if(e.target.textContent==="Mark as Complete")
+        if(e.target.textContent==="Start Now"){
+            e.target.textContent="Mark as Complete"
+            status="In Progress"
+        }
+        else if(e.target.textContent==="Mark as Complete"){
              status="Completed";
-        else
-           
+             e.target.textContent="Completed"
+        }
         try{
             const response=await fetch("http://localhost:3000/books/",{
                 method:"PATCH",
