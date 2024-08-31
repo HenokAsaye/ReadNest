@@ -1,4 +1,4 @@
-import {check , validationReult} from "express-validator"
+import {check , validationResult} from "express-validator"
 
 export const validateRegister = [
     check('username')
@@ -9,7 +9,7 @@ export const validateRegister = [
     check('password')
         .isLength({min:6}).withMessage('Password atleast must have 6 chracters long '),
     (req,res,next) =>{
-        const errors = validationReult(req)
+        const errors = validationResult(req)
         if(!errors.isEmpty()){
             return res.status(400).json({errors:errors.array()})
         }
@@ -19,7 +19,7 @@ export const validateRegister = [
 ];
 export const validateLogin =[
     check('password')
-        .isEmpty().withMessage('password is required!'),
+        .notEmpty().withMessage('password is required!'),
     (req,res,next) =>{
         const errors = validationReult(req)
         if(!errors.isEmpty()){

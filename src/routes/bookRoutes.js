@@ -6,12 +6,13 @@ import {
    updateBookStatus,
    deleteBooks,
 } from "../controllers/bookController.js";
+import {validateAddBook ,validateUpdateBook} from "../validators/bookValidators.js"
 const router = Router();
 
 
 router.get("/", auth, getUserBooks);
-router.post("/",auth,  addBook);
-router.patch("/",auth,  updateBookStatus);
+router.post("/",auth,validateAddBook,  addBook);
+router.patch("/",auth,validateUpdateBook,  updateBookStatus);
 router.delete("/",auth,  deleteBooks);
 
 
