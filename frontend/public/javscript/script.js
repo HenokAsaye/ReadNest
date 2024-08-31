@@ -60,7 +60,7 @@ const displayBooks = (book,container,btnMsg) => {
                 <h2>Title: ${book.title}</h2>
                 <img src=${book.coverImg} alt="no image">
                 <p>author: ${book.author} </p>
-                <div></div>
+                <button class="addBooks">${btnMsg}</button>
             </div>
           `;
    });
