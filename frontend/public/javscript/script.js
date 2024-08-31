@@ -6,7 +6,8 @@ const myBookContainer = document.getElementById("myBooks");
 const showMyBooks = document.getElementById("showMyBooks");
 const showRecommended=document.getElementById("showRecommended")
 const showCreateBook=document.getElementById("showCreateBook")
-
+const loadingIndicator = document.getElementById("loading");
+loadingIndicator.style.display = "block";
 let booksData={};
 let myBookList={};
 const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDJjNjEyNjM0MzBjYmIyYjFiYTI0NCIsImlhdCI6MTcyNTA4OTMxM30.zCOWdPCin6BKy8j8kkVQu2yTOhBCsv14vy6tRLpdxI4";
@@ -29,6 +30,7 @@ const getBooks=async()=>{
    try  { 
     const myBooksList=await fetchData("http://localhost:3000/books/");
     const recommendedBooks=await fetchData("http://localhost:3000/api/books?genre=thriller")
+    loadingIndicator.style.display = "none";
     booksData=[...recommendedBooks.recommendations]
     myBookList=[...myBooksList.books]
    }catch (error) {
@@ -78,6 +80,7 @@ bookContainer.addEventListener("click",async(e)=>{
           }
          });
          if (response.ok) {
+            window.location.reload();
             const result = await response.json();
             console.log('book added successfully:', result);
         } else {
@@ -120,25 +123,35 @@ myBookContainer.addEventListener("click",async(e)=>{
     }
     if(e.target.classList.contains("removeBook")) {
         const index=e.target.parentElement.id
-        e.target.parentElement.remove();
-        try{
-            const response=await fetch("http://localhost:3000/books/",{
-                method:"DELETE",
-                body:JSON.stringify({title:myBookList[index].title,author:myBookList[index].author}),
-                headers:{
-                    "Content-type": "application/json",
-                    "authorization":token
+        const parentElement=e.target.parentElement
+        const modal=document.getElementById("modal")
+        modal.style.display="block";
+        document.getElementById("yes").addEventListener("click",async(e)=>{
+            try{
+                const response=await fetch("http://localhost:3000/books/",{
+                    method:"DELETE",
+                    body:JSON.stringify({title:myBookList[index].title,author:myBookList[index].author}),
+                    headers:{
+                        "Content-type": "application/json",
+                        "authorization":token
+                    }
+                })
+                if (response.ok) {
+                    parentElement.remove();
+                    const result = await response.json();
+                    console.log('book deleted successfully:', result);
+                } else {
+                    console.error('book deleting failed:');
                 }
-            })
-            if (response.ok) {
-                const result = await response.json();
-                console.log('book deleted successfully:', result);
-            } else {
-                console.error('book deleting failed:');
+            }catch(err){
+                console.log(err)
             }
-        }catch(err){
-            console.log(err)
-        }
+            modal.style.display="none"
+        })
+        document.getElementById("no").addEventListener("click",(e)=>{
+            modal.style.display="none"
+        })
+        
     }
 })
 showMyBooks.onclick=() => {
@@ -170,6 +183,7 @@ document.getElementById("bookForm").addEventListener("submit",async function(e){
       }
      })
      if (response.ok) {
+        window.location.reload();
         const result = await response.json();
         console.log('book form added successfully:', result);
     } else {
