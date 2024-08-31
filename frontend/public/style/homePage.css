@@ -138,6 +138,36 @@ aside button:hover {
    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
    color: #D8B5FF;
 }
+.modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #4e65ff;
+    max-width: 400px;
+    padding: 15px;
+    color: #D8B5FF;
+    box-shadow: rgba(0, 0, 0, 0.44) 0px 3px 8px;
+    z-index: 99;
+    display: none;
+}
+.modal p{
+   font-size: 15px;
+   line-height: 1.5;
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+.modal button{
+   width: 150px;
+   height: 40px;
+   color: #D8B5FF;
+   font-size: 16px;
+   background-color: #0b3a68;
+   border: 0;
+}
+#yes{
+   background-color: rgb(189, 47, 47);
+}
 h2 {
    font-size: 1.2rem;
    margin-top: 30px;

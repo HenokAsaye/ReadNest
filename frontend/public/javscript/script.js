@@ -120,25 +120,35 @@ myBookContainer.addEventListener("click",async(e)=>{
     }
     if(e.target.classList.contains("removeBook")) {
         const index=e.target.parentElement.id
-        e.target.parentElement.remove();
-        try{
-            const response=await fetch("http://localhost:3000/books/",{
-                method:"DELETE",
-                body:JSON.stringify({title:myBookList[index].title,author:myBookList[index].author}),
-                headers:{
-                    "Content-type": "application/json",
-                    "authorization":token
+        const parentElement=e.target.parentElement
+        const modal=document.getElementById("modal")
+        modal.style.display="block";
+        document.getElementById("yes").addEventListener("click",async(e)=>{
+            try{
+                const response=await fetch("http://localhost:3000/books/",{
+                    method:"DELETE",
+                    body:JSON.stringify({title:myBookList[index].title,author:myBookList[index].author}),
+                    headers:{
+                        "Content-type": "application/json",
+                        "authorization":token
+                    }
+                })
+                if (response.ok) {
+                    parentElement.remove();
+                    const result = await response.json();
+                    console.log('book deleted successfully:', result);
+                } else {
+                    console.error('book deleting failed:');
                 }
-            })
-            if (response.ok) {
-                const result = await response.json();
-                console.log('book deleted successfully:', result);
-            } else {
-                console.error('book deleting failed:');
+            }catch(err){
+                console.log(err)
             }
-        }catch(err){
-            console.log(err)
-        }
+            modal.style.display="none"
+        })
+        document.getElementById("no").addEventListener("click",(e)=>{
+            modal.style.display="none"
+        })
+        
     }
 })
 showMyBooks.onclick=() => {
