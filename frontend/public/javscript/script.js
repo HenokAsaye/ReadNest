@@ -29,8 +29,8 @@ const getBooks=async()=>{
    try  { 
     const myBooksList=await fetchData("http://localhost:3000/books/");
     const recommendedBooks=await fetchData("http://localhost:3000/api/books?genre=thriller")
-    booksData={...recommendedBooks}
-    myBookList={recommendations:[...myBooksList.books]}
+    booksData=[...recommendedBooks.recommendations]
+    myBookList=[...myBooksList.books]
    }catch (error) {
     console.error('Error fetching books:', error);
   }
@@ -39,9 +39,21 @@ const getBooks=async()=>{
 }
 getBooks();
 const displayBooks = (book,container,btnMsg) => {
-   book.recommendations.forEach((book,index) => {
+
+   book.forEach((book,index) => {
       if(!book.coverImg) {
         book.coverImg="../../img/book.jpg";
+    }
+    if(btnMsg!=="Add Book"){
+        if(book.status==="Not Started"){
+             btnMsg="Start Now";
+        }
+        else if(book.status==="In Progress"){
+            btnMsg="Mark as Complete"
+        }
+        else{
+            btnMsg="Completed"
+        }
     }
       container.innerHTML += `
           <div class="book" id=${index}>
@@ -58,7 +70,7 @@ bookContainer.addEventListener("click",async(e)=>{
         const index=e.target.parentElement.id
        try{ const response=await fetch("http://localhost:3000/books/",{
             method: "POST",
-            body: JSON.stringify(booksData.recommendations[index]),
+            body: JSON.stringify(booksData[index]),
             headers: {
             "Content-type": "application/json",
             "authorization":token
@@ -73,6 +85,36 @@ bookContainer.addEventListener("click",async(e)=>{
             console.log(err)
         }
       }
+})
+myBookContainer.addEventListener("click",async(e)=>{
+    if(e.target.tagName=="BUTTON") {
+        const index=e.target.parentElement.id
+        let status;
+        if(e.target.textContent==="Start Now")
+             status="In Progress"
+        else if(e.target.textContent==="Mark as Complete")
+             status="Completed";
+        else
+           
+        try{
+            const response=await fetch("http://localhost:3000/books/",{
+                method:"PATCH",
+                body:JSON.stringify({title:myBookList[index].title,status}),
+                headers:{
+                    "Content-type": "application/json",
+                    "authorization":token
+                }
+            })
+            if (response.ok) {
+                const result = await response.json();
+                console.log('status updated successfully:', result);
+            } else {
+                console.error('status updating failed:');
+            }
+        }catch(err){
+            console.log(err)
+        }
+    }
 })
 showMyBooks.onclick=() => {
    recommendedBooks.style.display = "none";
