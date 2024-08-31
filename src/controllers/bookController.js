@@ -1,11 +1,10 @@
 import { fetchBooks } from "../utils/externalAPI.js";
 import Book from "../models/bookModels.js";
 import User from "../models/userModels.js";
-import mongoose from "mongoose";
 
 export const addBook = async (req, res) => {
     try {
-        const userId = req.user._id;
+        const userId = req.user.id
         const { title, author, genre, publishedDate } = req.body;
 
         if (!title || !author || !genre) {
@@ -28,27 +27,25 @@ export const addBook = async (req, res) => {
             }
 
             let newBook = new Book(bookDetails);
+            newBook.owner=userId;
             newBook= await newBook.save();
-
-            await User.findByIdAndUpdate(userId, { $push: { books: newBook._id } });
-
+            const user=await User.findByIdAndUpdate(userId, { $push: { books: newBook._id } },{new:true});
             return res.status(201).json({ message: "Book added successfully!", book: newBook });
         }
 
         let newBook = new Book({ title, author, genre, publishedDate });
+        newBook.owner=userId;
         newBook=await newBook.save();
-
-        await User.findByIdAndUpdate(userId, { $push: { books: newBook._id } });
-
+        const user=await User.findByIdAndUpdate(userId, { $push: { books: newBook._id } },{new:true});
         return res.status(201).json({ message: "Book added successfully!", book: newBook });
     } catch (error) {
-        return res.status(500).json({ message: "An unknown error occurred!" });
+        return res.status(500).json({ message: "An  error occurred!"+error.message });
     }
 };
 
 export const getUserBooks = async (req, res) => {
     try {
-        const userId = req.user._id;
+        const userId = req.user.id
         const foundUser = await User.findById(userId).populate({
             path: 'books',
             options: {
@@ -68,25 +65,24 @@ export const getUserBooks = async (req, res) => {
             books,
         });
     } catch (error) {
-        return res.status(500).json({ message: "An error occurred while retrieving the books" });
+        return res.status(500).json({ message: "An error occurred while retrieving the books"+error.message });
     }
 };
 
 export const updateBookStatus = async (req, res) => {
     try {
-        const userId = req.user._id;
-        const objectUserID=mongoose.Types.ObjectId(userId)
-        const { title, readStatus } = req.body;
+        const userId = req.user.id
+        const { title, status } = req.body;
 
-        if (!title || !readStatus) {
+        if (!title || !status) {
             return res.status(400).json({ message: "Book title and ReadStatus are required!" });
         }
 
-        if (!['Not Started', 'In Progress', 'Completed'].includes(readStatus)) {
+        if (!['Not Started', 'In Progress', 'Completed'].includes(status)) {
             return res.status(400).json({ message: "Invalid Read Status!" });
         }
 
-        const updatedBook = await Book.findOneAndUpdate({title:title,owner:objectUserID},{$set:{status:readStatus}},{new:true});
+        const updatedBook = await Book.findOneAndUpdate({title:title,owner:userId},{$set:{status:status}},{new:true});
         if (!updatedBook) {
             return res.status(404).json({ message: "Book not found in your collection" });
         }
@@ -94,17 +90,17 @@ export const updateBookStatus = async (req, res) => {
             ,updatedBook:updatedBook});
 
     } catch (error) {
-        return res.status(500).json({ message: "An error occurred while updating the read status" });
+        return res.status(500).json({ message: "An error occurred while updating the read status"+error.message });
     }
 };
 
 export const deleteBooks = async (req, res) => {
     try {
-        const userId = req.user._id;
+        const userId = req.user.id
         const { title, author } = req.body;
 
         if (!title) {
-            return res.status(404).json({ message: `There is no book with the title "${title}" in your collection` });
+            return res.status(400).json({ message: `title field is required` });
         }
 
         const userD = await User.findById(userId).populate('books');
@@ -125,6 +121,6 @@ export const deleteBooks = async (req, res) => {
 
         return res.status(200).json({ message: `Book "${title}" by ${author || 'unknown author'} has been successfully deleted from your collection` });
     } catch (error) {
-        return res.status(500).json({ message: "An unknown error has occurred" });
+        return res.status(500).json({ message: "An unknown error has occurred"+error.message });
     }
 };
