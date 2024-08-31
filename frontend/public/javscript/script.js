@@ -42,7 +42,6 @@ getBooks();
 const displayBooks = (book,container,btnMsg) => {
    book.recommendations.forEach((book,index) => {
       if(!book.coverImg) {
-        console.log("one")
         book.coverImg="../../img/book.jpg";
     }
       container.innerHTML += `
@@ -58,7 +57,6 @@ const displayBooks = (book,container,btnMsg) => {
 bookContainer.addEventListener("click",async(e)=>{
     if(e.target.tagName=="BUTTON") {
         const index=e.target.parentElement.id
-        console.log(booksData.recommendations[index])
        try{ const response=await fetch("http://localhost:3000/books/",{
             method: "POST",
             body: JSON.stringify(booksData.recommendations[index]),
@@ -97,7 +95,6 @@ document.getElementById("bookForm").addEventListener("submit",async function(e){
      e.preventDefault();
      const formData = new FormData(this);
      const formObject = Object.fromEntries(formData.entries());
-     console.log(formObject)
      try{const response=await fetch("http://localhost:3000/books/",{
         method: "POST",
         body: JSON.stringify(formObject),
