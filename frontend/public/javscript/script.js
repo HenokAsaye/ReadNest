@@ -6,7 +6,8 @@ const myBookContainer = document.getElementById("myBooks");
 const showMyBooks = document.getElementById("showMyBooks");
 const showRecommended=document.getElementById("showRecommended")
 const showCreateBook=document.getElementById("showCreateBook")
-
+const loadingIndicator = document.getElementById("loading");
+loadingIndicator.style.display = "block";
 let booksData={};
 let myBookList={};
 const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDJjNjEyNjM0MzBjYmIyYjFiYTI0NCIsImlhdCI6MTcyNTA4OTMxM30.zCOWdPCin6BKy8j8kkVQu2yTOhBCsv14vy6tRLpdxI4";
@@ -29,6 +30,7 @@ const getBooks=async()=>{
    try  { 
     const myBooksList=await fetchData("http://localhost:3000/books/");
     const recommendedBooks=await fetchData("http://localhost:3000/api/books?genre=thriller")
+    loadingIndicator.style.display = "none";
     booksData=[...recommendedBooks.recommendations]
     myBookList=[...myBooksList.books]
    }catch (error) {
@@ -78,6 +80,7 @@ bookContainer.addEventListener("click",async(e)=>{
           }
          });
          if (response.ok) {
+            window.location.reload();
             const result = await response.json();
             console.log('book added successfully:', result);
         } else {
@@ -180,6 +183,7 @@ document.getElementById("bookForm").addEventListener("submit",async function(e){
       }
      })
      if (response.ok) {
+        window.location.reload();
         const result = await response.json();
         console.log('book form added successfully:', result);
     } else {

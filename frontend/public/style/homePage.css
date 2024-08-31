@@ -235,3 +235,24 @@ textarea {
    border-radius: 10px;
    outline: none;
 }
+.loading {
+   position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+   width: 50px;
+   height: 50px;
+   border: 6px dotted #89a9d3;
+   border-radius: 50%;
+   transform: rotateY(360deg);
+   animation: spin 2s linear infinite;
+   display: none;
+}
+@keyframes spin {
+   0% {
+      transform: rotate(0deg);
+   }
+   100% {
+      transform: rotate(360deg);
+   }
+}
