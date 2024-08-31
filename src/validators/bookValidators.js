@@ -12,7 +12,7 @@ export const validateAddBook = [
         .optional()
         .notEmpty().withMessage("Genre is Required!"),
     (req,res,next) =>{
-        const errors = validationReult(req)
+        const errors = validationResult(req)
         if(!errors.isEmpty()){
             return res.status(400).json({errors:errors.array()});
         }
