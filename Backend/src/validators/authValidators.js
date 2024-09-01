@@ -6,6 +6,8 @@ export const validateRegister = [
         .isLength({min:3}).withMessage("username must be atleast 3 charachters long"),
     check('email')
         .isEmail().withMessage('please provide a valid message'),
+    check('preferredGenre')
+        .notEmpty().withMessage('please provide a Genre'),
     check('password')
         .isLength({min:6}).withMessage('Password atleast must have 6 chracters long '),
     (req,res,next) =>{

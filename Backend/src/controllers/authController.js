@@ -3,7 +3,8 @@ import bcrypt from "bcryptjs"
 import { generateAuthToken } from "../utils/jwt.js";
 
 export const signup = async (req, res) => {
-   const { username, email, password } = req.body;
+   const { username, email,preferredGenre, password } = req.body;
+   console.log(req.body)
    try {
       const existingUser = await User.findOne({ email: email });
       if (existingUser) return res.status(409).send("User Exists");
@@ -11,10 +12,12 @@ export const signup = async (req, res) => {
       const newUser = new User({
          username: username,
          email: email,
+         preferredGenre:preferredGenre,
          password: hashedPassword,
       });
-      await newUser.save();
-      res.send("registration successful");
+      const user=await newUser.save();
+      const token = generateAuthToken(user);
+      res.status(201).json({message:"registeration successful",token:token,preferredGenre:user.preferredGenre});
    } catch (err) {
       res.status(500).send(`Error: ${err.message}`);
    }
@@ -29,7 +32,7 @@ export const login = async (req, res) => {
          return res.status(400).send("Invalid Email or Password");
 
       const token = generateAuthToken(user);
-      res.status(200).send(token);
+      res.status(200).json({token:token,preferredGenre:user.preferredGenre});
    } catch (err) {
       res.status(500).send(`Error: ${err.message}`);
    }
