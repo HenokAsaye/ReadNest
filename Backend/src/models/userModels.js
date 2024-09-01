@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Book'
     }],
+    preferredGenre:{
+        type:String,
+        required:true
+    }
 }, { timestamps: true });
 
 
