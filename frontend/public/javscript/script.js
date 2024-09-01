@@ -10,7 +10,9 @@ const loadingIndicator = document.getElementById("loading");
 loadingIndicator.style.display = "block";
 let booksData={};
 let myBookList={};
-const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDJjNjEyNjM0MzBjYmIyYjFiYTI0NCIsImlhdCI6MTcyNTA4OTMxM30.zCOWdPCin6BKy8j8kkVQu2yTOhBCsv14vy6tRLpdxI4";
+const userData=JSON.parse(localStorage.getItem("user"))
+const token=userData.token;
+const genre=userData.preferredGenre;
 const fetchData=async(url)=>{
      try{
          const res=await fetch(url,{
@@ -29,7 +31,7 @@ const fetchData=async(url)=>{
 const getBooks=async()=>{
    try  { 
     const myBooksList=await fetchData("http://localhost:3000/books/");
-    const recommendedBooks=await fetchData("http://localhost:3000/api/books?genre=thriller")
+    const recommendedBooks=await fetchData(`http://localhost:3000/api/books?genre=${genre}`)
     loadingIndicator.style.display = "none";
     booksData=[...recommendedBooks.recommendations]
     myBookList=[...myBooksList.books]

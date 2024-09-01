@@ -61,7 +61,7 @@ body {
   box-shadow: 0 0 5px rgba(74, 144, 226, 0.5); 
 }
 
-.container input[type="submit"] {
+.container button {
   width: 100%;
   padding: 12px; 
   background: -webkit-linear-gradient(right, #003366, #004080, #0059b3, #0073e6);
@@ -74,7 +74,7 @@ body {
   transition: background-color 0.3s, transform 0.2s;
 }
 
-.container input[type="submit"]:hover {
+.container button:hover {
   transform: translateY(-2px); 
 }
 
