@@ -52,7 +52,7 @@ To start using **ReadNest**, follow these steps:
 
 ## How to Use
 
-1. Visit the [ReadNest website](#) to get started.
+1. Visit the [ReadNest website](https://read-nest-delta.vercel.app/signup.html) to get started.
 2. Sign up or log in to your account.
 3. Browse books by genre or search for specific titles.
 4. Add books to your read list.
