@@ -7,7 +7,7 @@ signUpForm.addEventListener("submit",async function(e){
     const formObject = Object.fromEntries(formData.entries());
     try {
       const response = await fetch(
-        "http://localhost:3000/auth/register",
+        "https://readnest.onrender.com/auth/register",
         {
           method: "POST",
           body: JSON.stringify(formObject),
