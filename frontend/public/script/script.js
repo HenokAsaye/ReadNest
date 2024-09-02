@@ -2,8 +2,10 @@ const recommendedBooks = document.querySelector(".books");
 const createBook=document.querySelector(".createBook");
 const myBooks = document.querySelector(".myBooks");
 const searchResult=document.querySelector(".searchResults");
+const bookDetails=document.querySelector(".bookDetails")
 const bookContainer = document.getElementById("books");
 const myBookContainer = document.getElementById("myBooks");
+const bookDetailContainer=document.getElementById("bookDetail-container");
 const showMyBooks = document.getElementById("showMyBooks");
 const showRecommended=document.getElementById("showRecommended")
 const showCreateBook=document.getElementById("showCreateBook")
@@ -12,6 +14,8 @@ const searchResultContainer=document.getElementById("searchResult");
 const searchBtn=document.getElementById("searchButton");
 const searchBox=document.getElementById("search");
 const goBackBtn=document.getElementById("goBack");
+const closeDetails=document.getElementById("close-Details")
+
 loadingIndicator.style.display = "block";
 let booksData={};
 let myBookList={};
@@ -70,12 +74,13 @@ const displayBooks = (book,container,btnMsg,isMyCollection) => {
                 <img src=${book.coverImg} alt="no image">
                 <p>author: ${book.author} </p>
                 <button class="addBooks">${btnMsg}</button>
+                <button class="bookDetail">Book Details</button>
                 ${isMyCollection?"<button class='removeBook'>X</button>":""}
             </div>
           `;
    });
 };
-const addBooks=async(booksData,index)=>{
+const addBooks=async(booksData)=>{
     try{ const response=await fetch("http://localhost:3000/books/",{
         method: "POST",
         body: JSON.stringify(booksData),
@@ -94,11 +99,36 @@ const addBooks=async(booksData,index)=>{
         console.log(err)
     }
 }
+const getBookDetail=(book)=>{
+    bookDetailContainer.innerHTML = `
+    <div class="book bookInfo">
+          <h2>Title: ${book.title}</h2>
+          <img src=${book.coverImg} alt="no image">
+          <p>Author: ${book.author} </p>
+          <p>Genre: ${book.genre} </p>
+          <p>Description: ${book.description} </p>
+          <p>Published-Date: ${book.publishedDate} </p>
+          ${!book.status?"<button class='addBooks'>Add Book</button>":""}
+      </div>
+    `;
+    bookDetailContainer.addEventListener("click",(e)=>{
+        if(e.target.tagName=="BUTTON"&&e.target.classList.contains("addBooks")) {
+            const index=e.target.parentElement.id
+            addBooks(book);
+        }
+    })
+}
 bookContainer.addEventListener("click",(e)=>{
-    if(e.target.tagName=="BUTTON") {
+    if(e.target.tagName=="BUTTON"&&e.target.classList.contains("addBooks")) {
        const index=e.target.parentElement.id
        addBooks(booksData[index]);
       }
+    if(e.target.tagName=="BUTTON"&&e.target.classList.contains("bookDetail")) {
+        recommendedBooks.style.display = "none";
+        bookDetails.style.display="block"
+        const index=e.target.parentElement.id
+        getBookDetail(booksData[index])
+    }
 })
 myBookContainer.addEventListener("click",async(e)=>{
     if(e.target.classList.contains("addBooks")) {
@@ -131,6 +161,12 @@ myBookContainer.addEventListener("click",async(e)=>{
             console.log(err)
         }
     }
+    if(e.target.tagName=="BUTTON"&&e.target.classList.contains("bookDetail")) {
+        myBooks.style.display = "none";
+        bookDetails.style.display="block"
+        const index=e.target.parentElement.id
+        getBookDetail(myBookList[index])
+       }
     if(e.target.classList.contains("removeBook")) {
         const index=e.target.parentElement.id
         const parentElement=e.target.parentElement
@@ -169,6 +205,7 @@ searchBtn.addEventListener("click",async(e)=>{
       searchBox.value="";
          recommendedBooks.style.display = "none";
          myBooks.style.display="none"
+         bookDetails.style.display="none"
          searchResult.style.display="block";
       loadingIndicator.style.display="block"
       try{
@@ -177,16 +214,26 @@ searchBtn.addEventListener("click",async(e)=>{
          displayBooks(searchedBooks.results,searchResultContainer,"Add Book",false);
          createBook.style.display="none";
 
-         searchResultContainer.addEventListener("click",(e)=>{
-            if(e.target.tagName=="BUTTON") {
+        searchResultContainer.addEventListener("click",(e)=>{
+            if(e.target.tagName=="BUTTON"&&e.target.classList.contains("addBooks")) {
                const index=e.target.parentElement.id
                addBooks(searchedBooks.results[index]);
               }
+            if(e.target.tagName=="BUTTON"&&e.target.classList.contains("bookDetail")) {
+                searchResult.style.display = "none";
+                bookDetails.style.display="block"
+                const index=e.target.parentElement.id
+                getBookDetail(searchedBooks.results[index])
+            }
         })
       }catch(err){
            console.log(err)
       }
 })
+closeDetails.onclick=()=>{
+    bookDetails.style.display="none";
+    recommendedBooks.style.display="block";
+}
 goBackBtn.onclick=()=>{
     searchResultContainer.innerHTML='';
     searchResult.style.display="none"
@@ -196,16 +243,19 @@ showMyBooks.onclick=() => {
    recommendedBooks.style.display = "none";
    myBooks.style.display="block"
    createBook.style.display="none";
+   bookDetails.style.display="none"
 };
 showRecommended.onclick=()=>{
     recommendedBooks.style.display = "block";
     myBooks.style.display="none"
     createBook.style.display="none";
+    bookDetails.style.display="none"
 }
 showCreateBook.onclick=()=>{
     recommendedBooks.style.display = "none";
     myBooks.style.display="none"
     createBook.style.display="block";
+    bookDetails.style.display="none"
 }
 
 document.getElementById("bookForm").addEventListener("submit",function(e){
