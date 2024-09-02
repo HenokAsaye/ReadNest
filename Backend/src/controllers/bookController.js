@@ -10,6 +10,8 @@ export const addBook = async (req, res) => {
         if (!title || !author || !genre) {
             return res.status(400).json({ message: "Title,Author And genre are required" });
         }
+        const existingBook=Book.findOne({title:title});
+        if(existingBook) return res.status(409).json({message:"Book already exist in the collection"});
         let newBook = new Book(req.body);
         newBook.owner=userId;
         newBook=await newBook.save();
