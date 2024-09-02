@@ -1,4 +1,3 @@
-import { fetchBooks } from "../utils/externalAPI.js";
 import Book from "../models/bookModels.js";
 import User from "../models/userModels.js";
 
@@ -10,7 +9,7 @@ export const addBook = async (req, res) => {
         if (!title || !author || !genre) {
             return res.status(400).json({ message: "Title,Author And genre are required" });
         }
-        const existingBook=Book.findOne({title:title});
+        const existingBook=await Book.findOne({title:title});
         if(existingBook) return res.status(409).json({message:"Book already exist in the collection"});
         let newBook = new Book(req.body);
         newBook.owner=userId;
