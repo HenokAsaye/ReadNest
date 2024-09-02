@@ -1,12 +1,17 @@
 const recommendedBooks = document.querySelector(".books");
 const createBook=document.querySelector(".createBook");
 const myBooks = document.querySelector(".myBooks");
+const searchResult=document.querySelector(".searchResults");
 const bookContainer = document.getElementById("books");
 const myBookContainer = document.getElementById("myBooks");
 const showMyBooks = document.getElementById("showMyBooks");
 const showRecommended=document.getElementById("showRecommended")
 const showCreateBook=document.getElementById("showCreateBook")
 const loadingIndicator = document.getElementById("loading");
+const searchResultContainer=document.getElementById("searchResult");
+const searchBtn=document.getElementById("searchButton");
+const searchBox=document.getElementById("search");
+const goBackBtn=document.getElementById("goBack");
 loadingIndicator.style.display = "block";
 let booksData={};
 let myBookList={};
@@ -70,26 +75,29 @@ const displayBooks = (book,container,btnMsg,isMyCollection) => {
           `;
    });
 };
-bookContainer.addEventListener("click",async(e)=>{
+const addBooks=async(booksData,index)=>{
+    try{ const response=await fetch("http://localhost:3000/books/",{
+        method: "POST",
+        body: JSON.stringify(booksData),
+        headers: {
+        "Content-type": "application/json",
+        "authorization":token
+      }
+     });
+     if (response.ok) {
+        window.location.reload();
+        const result = await response.json();
+        console.log('book added successfully:', result);
+    } else {
+        console.error('book adding failed:');
+    }}catch(err){
+        console.log(err)
+    }
+}
+bookContainer.addEventListener("click",(e)=>{
     if(e.target.tagName=="BUTTON") {
-        const index=e.target.parentElement.id
-       try{ const response=await fetch("http://localhost:3000/books/",{
-            method: "POST",
-            body: JSON.stringify(booksData[index]),
-            headers: {
-            "Content-type": "application/json",
-            "authorization":token
-          }
-         });
-         if (response.ok) {
-            window.location.reload();
-            const result = await response.json();
-            console.log('book added successfully:', result);
-        } else {
-            console.error('book adding failed:');
-        }}catch(err){
-            console.log(err)
-        }
+       const index=e.target.parentElement.id
+       addBooks(booksData[index]);
       }
 })
 myBookContainer.addEventListener("click",async(e)=>{
@@ -156,6 +164,34 @@ myBookContainer.addEventListener("click",async(e)=>{
         
     }
 })
+searchBtn.addEventListener("click",async(e)=>{
+      const title=searchBox.value;
+      searchBox.value="";
+         recommendedBooks.style.display = "none";
+         myBooks.style.display="none"
+         searchResult.style.display="block";
+      loadingIndicator.style.display="block"
+      try{
+         const searchedBooks=await fetchData(`http://localhost:3000/api/books/search?q=${title}`)
+         loadingIndicator.style.display="none"
+         displayBooks(searchedBooks.results,searchResultContainer,"Add Book",false);
+         createBook.style.display="none";
+
+         searchResultContainer.addEventListener("click",(e)=>{
+            if(e.target.tagName=="BUTTON") {
+               const index=e.target.parentElement.id
+               addBooks(searchedBooks.results[index]);
+              }
+        })
+      }catch(err){
+           console.log(err)
+      }
+})
+goBackBtn.onclick=()=>{
+    searchResultContainer.innerHTML='';
+    searchResult.style.display="none"
+    recommendedBooks.style.display = "block";
+}
 showMyBooks.onclick=() => {
    recommendedBooks.style.display = "none";
    myBooks.style.display="block"
@@ -172,25 +208,9 @@ showCreateBook.onclick=()=>{
     createBook.style.display="block";
 }
 
-document.getElementById("bookForm").addEventListener("submit",async function(e){
+document.getElementById("bookForm").addEventListener("submit",function(e){
      e.preventDefault();
      const formData = new FormData(this);
      const formObject = Object.fromEntries(formData.entries());
-     try{const response=await fetch("http://localhost:3000/books/",{
-        method: "POST",
-        body: JSON.stringify(formObject),
-        headers: {
-        "Content-type": "application/json",
-        "authorization":token
-      }
-     })
-     if (response.ok) {
-        window.location.reload();
-        const result = await response.json();
-        console.log('book form added successfully:', result);
-    } else {
-        console.error('book form adding failed:');
-    }}catch(err){
-        console.log(err)
-    }
+     addBooks(formObject);
 })
