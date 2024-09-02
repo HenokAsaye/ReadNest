@@ -1,5 +1,4 @@
 {
-    "public": "public/html",
     "rewrites": [
       { "source": "/(.*)", "destination": "/html/$1" }
     ]
