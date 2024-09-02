@@ -93,7 +93,7 @@ main {
    padding-top: 30px;
    margin-top: 10px;
 }
-.search-header{
+.search-header,.Book-Detail-Header{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -107,7 +107,7 @@ main {
    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
    color: #D8B5FF;
 }
-.myBooks,.createBook,.searchResults{
+.myBooks,.createBook,.searchResults,.bookDetails{
    display: none;
 }
 .books,
@@ -158,7 +158,7 @@ p {
    font-size: 18px;
    text-transform: capitalize;
 }
-.addBooks {
+.addBooks,.bookDetail {
    padding: 6px;
    font-size: 17px;
    color: aliceblue;
@@ -216,6 +216,20 @@ textarea {
    width: 300px;
    border-radius: 10px;
    outline: none;
+}
+.bookInfo{
+   margin-top: 10px;
+}
+.bookInfo p{
+     font-size: 16px;
+     margin-bottom: 10px;
+}
+.bookInfo h2{
+   font-size: 1.8rem;
+   margin-bottom: 15px;
+}
+.bookInfo img{
+   margin-bottom: 15px;
 }
 .loading {
    position: absolute;
