@@ -22,7 +22,7 @@ logInForm.addEventListener("submit",async function(e){
              window.location.href="../html/index.html";
          }, 500);
       } else {
-        console.log(data.errors)
+         alert(data.error)
       }
     } catch (error) {
       console.error("Error during signup:", error);
