@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-image: url('../../img/bg-RN.png'); 
+    background-image: url('../img/bg-RN.png'); 
     background-repeat: no-repeat;
     background-size: cover; 
     background-position: center;  

@@ -1,4 +1,4 @@
-![ReadNest Banner](./frontend/img/Read%20Nest%20(1200%20x%20300%20px).png)
+![ReadNest Banner](./frontend/public/img/Read%20Nest%20(1200%20x%20300%20px).png)
 # ReadNest
 
 ReadNest is a simple book read list site that helps users keep track of the books they want to read. The platform offers functionalities such as authentication, genre categorization, and fetching book details from external sources.
@@ -13,9 +13,9 @@ ReadNest is a simple book read list site that helps users keep track of the book
 - User-friendly interface
 
 ## Screenshots
-![Screenshot 1](./frontend/img/Screenshot%202024-09-02%20155604.png)
-![Screenshot 2](./frontend/img/photo_2024-09-02_16-23-57.jpg)
-![Screenshot 3](./frontend/img/photo_2024-09-02_16-33-11.jpg)
+![Screenshot 1](./frontend/public/img/Screenshot%202024-09-02%20155604.png)
+![Screenshot 2](./frontend/public/img/photo_2024-09-02_16-23-57.jpg)
+![Screenshot 3](./frontend/public/img/photo_2024-09-02_16-33-11.jpg)
 
 
 ## Getting Started
