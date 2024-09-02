@@ -6,7 +6,7 @@
     <title>Home page</title>
     <link rel="stylesheet" href="../style/homePage.css" />
     <link rel="icon" href="../../img/bg-RN.png" style="border-radius: 50%" type="img/png">
-    <script src="../javscript/script.js" type="module" defer></script>
+    <script src="../script/script.js" type="module" defer></script>
 </head>
 <body>
     <header>
@@ -16,6 +16,7 @@
                 <input type="text" id="search" placeholder="Search for books..." />
                 <button id="searchButton">Search</button>
             </div>
+            <div id="results"></div>
         </div>
         <nav>
             <button id="showRecommended">Recommended Books</button>
@@ -24,7 +25,6 @@
         </nav>
     </header>
     <main>
-
         <section class="content">
             <section class="books">
                 <h1>Recommended Books</h1>
@@ -44,22 +44,17 @@
                     <label for="genre">Book Genre :</label>
                     <input type="text" id="genre" name="genre" required />
                     <label for="publishedDate">Published Date :</label>
-                    <input type="text" id="publishedDate" name="publishedDate" placeholder="YYYY-MM-DD" />
+                    <input type="text" id="publishedDate" name="publishedDate" placeholder="YYYY/MM/DD" />
                     <label for="description">Book Description :</label>
-                    <textarea
-                        type="text"
-                        id="description"
-                        name="description"
-                        cols="8"
-                        rows="10"></textarea>
+                    <textarea type="text" id="description" name="description" cols="8" rows="10"></textarea>
                     <button class="addBooks">Add Book</button>
                 </form>
             </section>
         </section>
         <section class="modal" id="modal">
              <h1>Are You sure You want to remove this Book?</h1>
-             <p>There is no going back from this the changes are permanent.
-               And your book will be removed permanently.</p>
+             <p>There is no going back from this. The changes are permanent,
+               and your book will be removed permanently.</p>
              <div>
                <button id="yes">YES</button>
                <button id="no">NO</button>
@@ -67,5 +62,13 @@
         </section>
         <div class="loading" id="loading"></div>
     </main>
+    <footer>
+        <p>&copy; 2024 ReadNest. All Rights Reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
+        </div>
+    </footer>
 </body>
 </html>

@@ -262,26 +262,37 @@ textarea {
       transform: rotate(360deg);
    }
 }
-#results {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-}
-
-.book {
-   background-color: #444;
-   margin: 10px;
-   padding: 10px;
-   border-radius: 5px;
-   width: 200px;
+footer {
+   background-color: #0d2748;
+   color: #D8B5FF;
    text-align: center;
-}
-
-.book img {
+   padding: 20px 0;
+   position: relative;
+   bottom: 0;
    width: 100%;
-   border-radius: 5px;
+   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+   margin-top: 20px;
 }
 
-.book h3, .book p {
-   margin: 5px 0;
+footer p {
+   margin-bottom: 10px;
+   font-size: 16px;
 }
+
+.footer-links {
+   display: flex;
+   justify-content: center;
+   gap: 20px;
+}
+
+.footer-links a {
+   color: #92effd;
+   text-decoration: none;
+   font-size: 14px;
+   transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+   color: #D8B5FF;
+}
+
