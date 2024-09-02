@@ -35,7 +35,7 @@ header h1 {
    font-size: 2rem;
    margin-left: 20px;
 }
-/* Search bar container */
+
 .search-bar {
    display: flex;
    align-items: center;
@@ -43,50 +43,45 @@ header h1 {
    border: 1px solid #D8B5FF;
    border-radius: 8px;
    background-color: #09203f;
-   padding: 5px; /* Add padding to the container for a cleaner look */
-   max-width: 100%; /* Ensure responsiveness */
+   padding: 5px; 
+   max-width: 100%;
  }
  
- /* Search input field */
  .search-bar input {
    padding: 10px;
    font-size: 1rem;
-   border: none; /* Remove default border */
-   background-color: transparent; /* Make input background transparent */
+   border: none; 
+   background-color: transparent;
    color: aliceblue;
-   flex: 1; /* Allow the input to grow */
-   min-width: 0; /* Prevent overflow in flex container */
-   outline: none; /* Remove default outline */
+   flex: 1; 
+   min-width: 0; 
+   outline: none; 
  }
- 
- /* Search button */
+
  .search-bar button {
    padding: 10px 15px;
    font-size: 1rem;
-   border: none; /* Remove default border */
+   border: none; 
    border-radius: 5px;
    background-color: #076cd0;
    color: aliceblue;
    cursor: pointer;
-   transition: background-color 0.3s ease; /* Add transition for smooth hover effect */
+   transition: background-color 0.3s ease;
  }
- 
- /* Button hover effect */
+
  .search-bar button:hover {
-   background-color: #1e90ff; /* Slightly lighter blue on hover */
+   background-color: #1e90ff;
  }
- 
- /* Responsive styles for smaller screens */
  @media (max-width: 600px) {
    .search-bar {
-     flex-direction: column; /* Stack input and button vertically on smaller screens */
-     align-items: stretch; /* Stretch items to full width */
+     flex-direction: column; 
+     align-items: stretch; 
    }
  
    .search-bar input,
    .search-bar button {
-     width: 100%; /* Full width for both input and button */
-     margin: 5px 0; /* Add vertical spacing between elements */
+     width: 100%;
+     margin: 5px 0; 
    }
  }
  
