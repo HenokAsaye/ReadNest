@@ -21,7 +21,7 @@ signUpForm.addEventListener("submit",async function(e){
       localStorage.setItem("user",JSON.stringify(data))
       if (response.ok) {
          setTimeout(() => {
-             window.location.href="../html/index.html";
+             window.location.href="../index.html";
          }, 500);
       } else {
          alert(data.error);
