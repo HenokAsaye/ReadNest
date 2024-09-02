@@ -25,14 +25,14 @@ export const login = async (req, res) => {
    try {
       const { email, password } = req.body;
       const user = await User.findOne({ email: email });
-      if (!user) return res.status(400).send("Invalid Email or Password");
+      if (!user) return res.status(400).json({error:"Invalid Email or Password"});
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (!passwordMatch)
-         return res.status(400).send("Invalid Email or Password");
+         return res.status(400).json({error:"Invalid Email or Password"});
 
       const token = generateAuthToken(user);
       res.status(200).json({token:token,preferredGenre:user.preferredGenre});
    } catch (err) {
-      res.status(500).send(`Error: ${err.message}`);
+      res.status(500).json({error:`Error: ${err.message}`});
    }
 };
