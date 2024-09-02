@@ -6,21 +6,25 @@
     <title>Signup</title>
     <link rel="icon" href="../../img/user.png"  type="img/png">
     <link rel="stylesheet" href="../style/style.css">
+    <script src="../javscript/signup.js" defer></script>
 </head>
 <body>
     <div class="container">
         <h2>Sign Up</h2>
-        <form action="#" method="post">
+        <form id="signup">
             <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Please Enter Your Full Name" required>
+            <input type="text" id="name" name="username" placeholder="Please Enter Your Full Name" required>
             
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="Please Enter Your Email" required>
-            
+
+            <label for="genre">Preferred Book Genre</label>
+            <input type="text" id="genre" name="preferredGenre" placeholder="Please Enter Your preferred Genre" required>
+
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Create Password" required>
             
-            <input type="submit" value="Sign Up">
+            <button>Sign Up</button>
             <div class="additional-options">
                 Already a member? <a href="login.html" class="signup">login now</a>
               </div>
