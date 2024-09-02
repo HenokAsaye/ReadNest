@@ -8,9 +8,9 @@ body {
    background-color: #09203f;
 }
 header {
-   position: fixed; /* Make the header fixed */
+   position: fixed; 
    top: 0;
-   width: 100%; /* Ensure the header spans the full width */
+   width: 100%; 
    padding: 20px;
    background-color: #0d2748;
    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
@@ -18,7 +18,7 @@ header {
    flex-direction: column;
    align-items: center;
    justify-content: space-between;
-   z-index: 1000; /* High z-index to stay above other elements */
+   z-index: 1000;
 }
 .header-content {
    width: 100%;
@@ -82,7 +82,7 @@ nav button:hover {
 main {
    display: flex;
    width: 100%;
-   margin-top: 100px; /* Adjusted to prevent content from being hidden behind the header */
+   margin-top: 100px;
 }
 aside {
    width: 250px;
@@ -107,7 +107,7 @@ aside button:hover {
 }
 .content {
    flex: 1;
-   padding: 120px 20px 20px 20px; /* Adjusted to prevent content from being hidden behind the header */
+   padding: 120px 20px 20px 20px; 
    min-height: 100vh;
    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
    color: #D8B5FF;
