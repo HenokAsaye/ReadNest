@@ -8,9 +8,6 @@ body {
    background-color: #09203f;
 }
 header {
-   position: fixed; 
-   top: 0;
-   width: 100%; 
    padding: 20px;
    background-color: #0d2748;
    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
@@ -18,7 +15,6 @@ header {
    flex-direction: column;
    align-items: center;
    justify-content: space-between;
-   z-index: 1000;
 }
 .header-content {
    width: 100%;
@@ -26,7 +22,6 @@ header {
    align-items: center;
    justify-content: space-between;
    margin-bottom: 10px;
-   z-index: 1000;
 }
 header h1 {
    background: linear-gradient(#4e65ff, #92effd);
@@ -49,7 +44,7 @@ header h1 {
    color: aliceblue;
    width: 300px;
 }
-.search-bar button {
+.search-bar button,.goBack {
    padding: 10px 15px;
    font-size: 1rem;
    margin-left: 10px;
@@ -82,43 +77,26 @@ nav button:hover {
 main {
    display: flex;
    width: 100%;
-   margin-top: 100px;
-}
-aside {
-   width: 250px;
-   color: aliceblue;
-   padding: 10px;
-   display: flex;
-   flex-direction: column;
-   align-items: flex-start;
-   box-shadow: 5px 0 5px rgba(0, 0, 0, 0.4);
-}
-aside button {
-   background-color: transparent;
-   margin-top: 10px;
-   color: #92effd;
-   padding: 6px;
-   font-size: 17px;
-   border: none;
-   cursor: pointer;
-}
-aside button:hover {
-   color: #D8B5FF;
 }
 .content {
    flex: 1;
-   padding: 120px 20px 20px 20px; 
+   padding: 20px;
    min-height: 100vh;
    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
    color: #D8B5FF;
 }
 .books-Container,
-.myBooks-Container {
+.myBooks-Container,.searchResult-container {
    display: grid;
    grid-template-columns: repeat(3, 1fr);
    gap: 25px;
    padding-top: 30px;
    margin-top: 10px;
+}
+.search-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .book {
    position: relative;
@@ -129,15 +107,13 @@ aside button:hover {
    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
    color: #D8B5FF;
 }
-.myBooks {
-   display: none;
-}
-.createBook {
+.myBooks,.createBook,.searchResults{
    display: none;
 }
 .books,
 .myBooks,
-.createBook {
+.createBook ,
+.searchResults{
    flex: 1;
    padding: 20px;
    min-height: 100vh;
@@ -243,9 +219,9 @@ textarea {
 }
 .loading {
    position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
    width: 50px;
    height: 50px;
    border: 6px dotted #89a9d3;
