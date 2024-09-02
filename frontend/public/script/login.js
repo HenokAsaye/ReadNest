@@ -6,7 +6,7 @@ logInForm.addEventListener("submit",async function(e){
     const formObject = Object.fromEntries(formData.entries());
     try {
       const response = await fetch(
-        "http://localhost:3000/auth/login",
+        "https://readnest.onrender.com/auth/login",
         {
           method: "POST",
           body: JSON.stringify(formObject),

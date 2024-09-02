@@ -39,8 +39,8 @@ const fetchData=async(url)=>{
 }
 const getBooks=async()=>{
    try  { 
-    const myBooksList=await fetchData("http://localhost:3000/books/");
-    const recommendedBooks=await fetchData(`http://localhost:3000/api/books?genre=${genre}`)
+    const myBooksList=await fetchData("https://readnest.onrender.com/books/");
+    const recommendedBooks=await fetchData(`https://readnest.onrender.com/api/books?genre=${genre}`)
     loadingIndicator.style.display = "none";
     booksData=[...recommendedBooks.recommendations]
     myBookList=[...myBooksList.books]
@@ -81,7 +81,7 @@ const displayBooks = (book,container,btnMsg,isMyCollection) => {
    });
 };
 const addBooks=async(booksData)=>{
-    try{ const response=await fetch("http://localhost:3000/books/",{
+    try{ const response=await fetch("https://readnest.onrender.com/books/",{
         method: "POST",
         body: JSON.stringify(booksData),
         headers: {
@@ -143,7 +143,7 @@ myBookContainer.addEventListener("click",async(e)=>{
              e.target.textContent="Completed"
         }
         try{
-            const response=await fetch("http://localhost:3000/books/",{
+            const response=await fetch("https://readnest.onrender.com/books/",{
                 method:"PATCH",
                 body:JSON.stringify({title:myBookList[index].title,status}),
                 headers:{
@@ -174,7 +174,7 @@ myBookContainer.addEventListener("click",async(e)=>{
         modal.style.display="block";
         document.getElementById("yes").addEventListener("click",async(e)=>{
             try{
-                const response=await fetch("http://localhost:3000/books/",{
+                const response=await fetch("https://readnest.onrender.com/books/",{
                     method:"DELETE",
                     body:JSON.stringify({title:myBookList[index].title,author:myBookList[index].author}),
                     headers:{
@@ -209,7 +209,7 @@ searchBtn.addEventListener("click",async(e)=>{
          searchResult.style.display="block";
       loadingIndicator.style.display="block"
       try{
-         const searchedBooks=await fetchData(`http://localhost:3000/api/books/search?q=${title}`)
+         const searchedBooks=await fetchData(`https://readnest.onrender.com/api/books/search?q=${title}`)
          loadingIndicator.style.display="none"
          displayBooks(searchedBooks.results,searchResultContainer,"Add Book",false);
          createBook.style.display="none";
