@@ -50,7 +50,7 @@ getBooks();
 const displayBooks = (book,container,btnMsg,isMyCollection) => {
 
    book.forEach((book,index) => {
-      if(!book.coverImg) {
+      if(!book.coverImg||book.coverImg=="no image") {
         book.coverImg="../../img/book.jpg";
     }
     if(btnMsg!=="Add Book"){
