@@ -4,7 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+     "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",
