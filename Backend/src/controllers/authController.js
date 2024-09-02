@@ -4,10 +4,9 @@ import { generateAuthToken } from "../utils/jwt.js";
 
 export const signup = async (req, res) => {
    const { username, email,preferredGenre, password } = req.body;
-   console.log(req.body)
    try {
       const existingUser = await User.findOne({ email: email });
-      if (existingUser) return res.status(409).send("User Exists");
+      if (existingUser) return res.status(409).json({error:"User Exists"});
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = new User({
          username: username,
@@ -19,7 +18,7 @@ export const signup = async (req, res) => {
       const token = generateAuthToken(user);
       res.status(201).json({message:"registeration successful",token:token,preferredGenre:user.preferredGenre});
    } catch (err) {
-      res.status(500).send(`Error: ${err.message}`);
+      res.status(500).json({error:`Error: ${err.message}`});
    }
 };
 export const login = async (req, res) => {
