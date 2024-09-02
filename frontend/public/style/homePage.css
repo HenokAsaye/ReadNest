@@ -39,12 +39,12 @@ header h1 {
 .search-bar {
    display: flex;
    align-items: center;
-   margin-right: 20px;
-   border: 1px solid #D8B5FF;
+   border: 0.5px solid #645c6d;
    border-radius: 8px;
    background-color: #09203f;
    padding: 5px; 
    max-width: 100%;
+   margin-left: 70%;
  }
  
  .search-bar input {
