@@ -54,9 +54,13 @@ getBooks();
 const displayBooks = (book,container,btnMsg,isMyCollection) => {
 
    book.forEach((book,index) => {
+      let isAdded=false;
+      if(btnMsg==="Add Book")
+        isAdded=myBookList.some(myBook=>book.title===myBook.title);
+      
       if(!book.coverImg||book.coverImg=="no image") {
         book.coverImg="../img/book.jpg";
-    }
+       }
     if(btnMsg!=="Add Book"){
         if(book.status==="Not Started"){
              btnMsg="Start Now";
@@ -73,7 +77,7 @@ const displayBooks = (book,container,btnMsg,isMyCollection) => {
                 <h2>Title: ${book.title}</h2>
                 <img src=${book.coverImg} alt="no image">
                 <p>author: ${book.author} </p>
-                <button class="addBooks">${btnMsg}</button>
+                ${isAdded?"<div class='addBooks'>Book Added</div>":`<button class='addBooks'>${btnMsg}</button>`};
                 <button class="bookDetail">Book Details</button>
                 ${isMyCollection?"<button class='removeBook'>X</button>":""}
             </div>
