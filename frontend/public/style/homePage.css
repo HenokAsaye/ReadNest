@@ -167,8 +167,13 @@ p {
    border-radius: 2px;
    width: 160px;
    cursor: pointer;
+   text-align: center;
 }
-.addBooks:hover {
+div.addBooks{
+   background-color: green;
+   color: #D8B5FF;
+}
+button.addBooks:hover {
    background-color: #1e90ff;
 }
 .removeBook{
