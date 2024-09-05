@@ -2,7 +2,7 @@ import dotenv from "dotenv"
 dotenv.config();
 export const fetchBooks = async (query) => {
     const apiKey =process.env.API_KEY ;
-    const maxResults = 10;
+    const maxResults = 16;
     const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&key=${apiKey}`;
 
     try {
