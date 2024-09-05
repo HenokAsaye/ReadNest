@@ -234,13 +234,17 @@ searchBtn.addEventListener("click",async(e)=>{
            console.log(err)
       }
 })
+const clearSearchResult=()=>{
+     searchResultContainer.innerHTML='';
+     searchResult.style.display="none"
+}
 closeDetails.onclick=()=>{
     bookDetails.style.display="none";
     recommendedBooks.style.display="block";
+    clearSearchResult();
 }
 goBackBtn.onclick=()=>{
-    searchResultContainer.innerHTML='';
-    searchResult.style.display="none"
+    clearSearchResult();
     recommendedBooks.style.display = "block";
 }
 showMyBooks.onclick=() => {
@@ -248,18 +252,21 @@ showMyBooks.onclick=() => {
    myBooks.style.display="block"
    createBook.style.display="none";
    bookDetails.style.display="none"
+   clearSearchResult();
 };
 showRecommended.onclick=()=>{
     recommendedBooks.style.display = "block";
     myBooks.style.display="none"
     createBook.style.display="none";
-    bookDetails.style.display="none"
+    bookDetails.style.display="none";
+    clearSearchResult();
 }
 showCreateBook.onclick=()=>{
     recommendedBooks.style.display = "none";
     myBooks.style.display="none"
     createBook.style.display="block";
     bookDetails.style.display="none"
+    clearSearchResult();
 }
 
 document.getElementById("bookForm").addEventListener("submit",function(e){
