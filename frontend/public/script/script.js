@@ -175,7 +175,7 @@ myBookContainer.addEventListener("click",async(e)=>{
         const index=e.target.parentElement.id
         const parentElement=e.target.parentElement
         const modal=document.getElementById("modal")
-        modal.style.display="block";
+        modal.style.display="flex";
         document.getElementById("yes").addEventListener("click",async(e)=>{
             try{
                 const response=await fetch("https://readnest.onrender.com/books/",{
