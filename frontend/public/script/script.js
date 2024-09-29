@@ -267,6 +267,7 @@ showCreateBook.onclick=()=>{
     createBook.style.display="block";
     bookDetails.style.display="none"
     clearSearchResult();
+
 }
 
 document.getElementById("bookForm").addEventListener("submit",function(e){

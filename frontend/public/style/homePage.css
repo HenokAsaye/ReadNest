@@ -31,6 +31,8 @@ header h1 {
    margin-left: 20px;
 }
 .search-bar {
+   width: 100%;
+   max-width: 350px;
    display: flex;
    align-items: center;
    margin-right: 20px;
@@ -39,16 +41,17 @@ header h1 {
    padding: 10px;
    font-size: 1rem;
    border-radius: 5px;
-   border: 1px solid #D8B5FF;
+   border: 1px solid #d8b5ff;
    background-color: #09203f;
    color: aliceblue;
-   width: 300px;
+   flex: 1;
 }
-.search-bar button,.goBack {
+.search-bar button,
+.goBack {
    padding: 10px 15px;
    font-size: 1rem;
    margin-left: 10px;
-   border: 1px solid #D8B5FF;
+   border: 1px solid #d8b5ff;
    border-radius: 5px;
    background-color: dodgerblue;
    color: aliceblue;
@@ -72,7 +75,7 @@ nav button {
    transition: color 0.3s ease;
 }
 nav button:hover {
-   color: #D8B5FF;
+   color: #d8b5ff;
 }
 main {
    display: flex;
@@ -83,20 +86,22 @@ main {
    padding: 20px;
    min-height: 100vh;
    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-   color: #D8B5FF;
+   color: #d8b5ff;
 }
 .books-Container,
-.myBooks-Container,.searchResult-container {
+.myBooks-Container,
+.searchResult-container {
    display: grid;
    grid-template-columns: repeat(3, 1fr);
    gap: 25px;
    padding-top: 30px;
    margin-top: 10px;
 }
-.search-header,.Book-Detail-Header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.search-header,
+.Book-Detail-Header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
 }
 .book {
    position: relative;
@@ -105,22 +110,25 @@ main {
    grid-row: span 5;
    padding: 10px;
    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-   color: #D8B5FF;
+   color: #d8b5ff;
 }
-.myBooks,.createBook,.searchResults,.bookDetails{
+.myBooks,
+.createBook,
+.searchResults,
+.bookDetails {
    display: none;
 }
 .books,
 .myBooks,
-.createBook ,
-.searchResults{
+.createBook,
+.searchResults {
    flex: 1;
    padding: 20px;
    min-height: 100vh;
    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-   color: #D8B5FF;
+   color: #d8b5ff;
 }
-.modal-overlay{
+.modal-overlay {
    position: fixed;
    top: 0;
    left: 0;
@@ -132,29 +140,29 @@ main {
    justify-content: center;
    align-items: center;
 }
-.modal{
-    background-color: #4e65ff;
-    max-width: 400px;
-    padding: 15px;
-    color: #D8B5FF;
-    box-shadow: rgba(0, 0, 0, 0.44) 0px 3px 8px;
-    z-index: 99;
+.modal {
+   background-color: #4e65ff;
+   max-width: 400px;
+   padding: 15px;
+   color: #d8b5ff;
+   box-shadow: rgba(0, 0, 0, 0.44) 0px 3px 8px;
+   z-index: 99;
 }
-.modal p{
+.modal p {
    font-size: 15px;
    line-height: 1.5;
    margin-top: 10px;
    margin-bottom: 10px;
 }
-.modal button{
+.modal button {
    width: 150px;
    height: 40px;
-   color: #D8B5FF;
+   color: #d8b5ff;
    font-size: 16px;
    background-color: #0b3a68;
    border: 0;
 }
-#yes{
+#yes {
    background-color: rgb(189, 47, 47);
 }
 h2 {
@@ -165,7 +173,8 @@ p {
    font-size: 18px;
    text-transform: capitalize;
 }
-.addBooks,.bookDetail {
+.addBooks,
+.bookDetail {
    padding: 6px;
    font-size: 17px;
    color: aliceblue;
@@ -176,25 +185,25 @@ p {
    cursor: pointer;
    text-align: center;
 }
-div.addBooks{
+div.addBooks {
    background-color: green;
-   color: #D8B5FF;
+   color: #d8b5ff;
 }
 button.addBooks:hover {
    background-color: #1e90ff;
 }
-.removeBook{
-    width: 30px;
-    height: 30px;
-    padding: 5px;
-    font-size: 1.3rem;
-    font-weight: bold;
-    background-color: transparent;
-    border: 0;
-    color: rgb(185, 11, 11);
-    position: absolute;
-    top: 10px;
-    right: 5px;
+.removeBook {
+   width: 30px;
+   height: 30px;
+   padding: 5px;
+   font-size: 1.3rem;
+   font-weight: bold;
+   background-color: transparent;
+   border: 0;
+   color: rgb(185, 11, 11);
+   position: absolute;
+   top: 10px;
+   right: 5px;
 }
 .book img {
    width: 160px;
@@ -229,25 +238,25 @@ textarea {
    border-radius: 10px;
    outline: none;
 }
-.bookInfo{
+.bookInfo {
    margin-top: 10px;
 }
-.bookInfo p{
-     font-size: 16px;
-     margin-bottom: 10px;
+.bookInfo p {
+   font-size: 16px;
+   margin-bottom: 10px;
 }
-.bookInfo h2{
+.bookInfo h2 {
    font-size: 1.8rem;
    margin-bottom: 15px;
 }
-.bookInfo img{
+.bookInfo img {
    margin-bottom: 15px;
 }
 .loading {
    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
    width: 50px;
    height: 50px;
    border: 6px dotted #89a9d3;
@@ -266,7 +275,7 @@ textarea {
 }
 footer {
    background-color: #0d2748;
-   color: #D8B5FF;
+   color: #d8b5ff;
    text-align: center;
    padding: 20px 0;
    position: relative;
@@ -295,6 +304,40 @@ footer p {
 }
 
 .footer-links a:hover {
-   color: #D8B5FF;
+   color: #d8b5ff;
 }
 
+@media screen and (max-width: 768px) {
+   nav button {
+      padding: 5px 10px;
+   }
+   .books-Container,
+   .myBooks-Container,
+   .searchResult-container {
+      grid-template-columns: 1fr;
+   }
+   .book {
+      max-width: 500px;
+   }
+   .header-content {
+      width: 100%;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+      justify-content: flex-start;
+   }
+   .books,
+   .myBooks,
+   .createBook,
+   .searchResults {
+      flex: 1;
+      padding: 5px;
+      min-height: 100vh;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      color: #d8b5ff;
+   }
+   .createBook form {
+      max-width: 90%;
+      margin-left: 0;
+   }
+}
