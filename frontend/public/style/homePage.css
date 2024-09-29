@@ -340,4 +340,11 @@ footer p {
       max-width: 90%;
       margin-left: 0;
    }
+   .createBook input,
+   textarea {
+      width: 100%;
+   }
+   .bookInfo h2 {
+      font-size: 1.1rem;
+   }
 }
