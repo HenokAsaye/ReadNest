@@ -6,7 +6,7 @@
     <title>Signup</title>
     <link rel="icon" href="./img/user.png"  type="img/png">
     <link rel="stylesheet" href="./style/style.css">
-    <script src="../script/signup.js" defer></script>
+    <script src="./script/signup.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -14,16 +14,19 @@
         <form id="signup">
             <label for="name">Full Name</label>
             <input type="text" id="name" name="username" placeholder="Please Enter Your Full Name" required>
-            
+            <div class="error"></div>
+
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="Please Enter Your Email" required>
+            <div class="error"></div>
 
             <label for="genre">Preferred Book Genre</label>
             <input type="text" id="genre" name="preferredGenre" placeholder="Please Enter Your preferred Genre" required>
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Create Password" required>
-            
+            <div class="error"></div>
+
             <button>Sign Up</button>
             <div class="additional-options">
                 Already a member? <a href="login.html" class="signup">login now</a>
