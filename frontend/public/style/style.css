@@ -38,6 +38,7 @@ body {
   margin-bottom: 8px;
   color: #333;
   font-weight: 500;
+  margin-top: 10px;
 }
 
 .container input[type="text"],
@@ -45,7 +46,7 @@ body {
 .container input[type="password"] {
   width: 100%;
   padding: 12px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   border: 1px solid rgb(0, 0, 0);
   border-radius: 8px;
   box-sizing: border-box;
@@ -72,6 +73,7 @@ body {
   font-size: 16px;
   font-weight: bold;
   transition: background-color 0.3s, transform 0.2s;
+  margin-top: 10px;
 }
 
 .container button:hover {
@@ -93,7 +95,9 @@ body {
   color: #333; 
   text-decoration: underline;
 }
-
+.error{
+  color: rgb(167, 27, 27);
+}
 @media screen and (max-width:768px) {
      body{
         background-position: left;
