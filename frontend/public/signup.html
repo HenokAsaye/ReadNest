@@ -6,6 +6,10 @@
     <title>Signup</title>
     <link rel="icon" href="./img/user.png"  type="img/png">
     <link rel="stylesheet" href="./style/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" defer></script>
+
     <script src="./script/signup.js" defer></script>
 </head>
 <body>
@@ -21,8 +25,31 @@
             <div class="error"></div>
 
             <label for="genre">Preferred Book Genre</label>
-            <input type="text" id="genre" name="preferredGenre" placeholder="Please Enter Your preferred Genre" required>
-
+            <div class="select">
+                <select id="genre-dropdown" name="preferredGenre" required>
+                    <option value="">Select a Genre</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Nonfiction">Nonfiction</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Biography & Autobiography">Biography & Autobiography</option>
+                    <option value="History">History</option>
+                    <option value="Business & Economics">Business & Economics</option>
+                    <option value="Computers & Technology">Computers & Technology</option>
+                    <option value="Self-Help">Self-Help</option>
+                    <option value="Health & Wellness">Health & Wellness</option>
+                    <option value="Religion & Spirituality">Religion & Spirituality</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Comics & Graphic Novels">Comics & Graphic Novels</option>
+                    <option value="Poetry">Poetry</option>
+                    <option value="Art & Photography">Art & Photography</option>
+                    <option value="Children's Books">Children's Books</option>
+                    <option value="Young Adult">Young Adult</option>
+                </select>
+            </div>      
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Create Password" required>
             <div class="error"></div>
