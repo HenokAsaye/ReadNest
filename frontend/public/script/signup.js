@@ -3,7 +3,13 @@ const username=document.getElementById("name")
 const email=document.getElementById("email")
 const password=document.getElementById("password")
 const errorShowEl=document.querySelectorAll(".error");
-console.log(username);
+
+$(document).ready(function() {
+  $('#genre-dropdown').select2({
+    minimumResultsForSearch: Infinity,
+    width: '100%',
+  });
+});
 
 username.addEventListener("focus",()=>{
   errorShowEl[0].textContent = "";
@@ -18,7 +24,7 @@ signUpForm.addEventListener("submit",async function(e){
     e.preventDefault()
     const formData = new FormData(this);
     const formObject = Object.fromEntries(formData.entries());
-    if(username.value.length<5){
+    if(username.value.length<4){
       errorShowEl[0].textContent = "name is too short (min-length:5 characters)";
       return;
     }
