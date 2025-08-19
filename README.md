@@ -57,4 +57,4 @@ To start using **ReadNest**, follow these steps:
 3. Browse books by genre or search for specific titles.
 4. Add books to your read list.
 
-## Thank you for choosing **ReadNest**
+## Thank you for choosing **ReadNest*
