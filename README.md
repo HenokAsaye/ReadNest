@@ -5,7 +5,6 @@ ReadNest is a simple book read list site that helps users keep track of the book
 
 
 ## Features
-
 - User authentication (signup and login)
 - Categorization of books by genre
 - Fetching book details from external sources based on the title
